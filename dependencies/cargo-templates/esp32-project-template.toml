@@ -1,0 +1,21 @@
+[package]
+name = "project-name"
+version = "0.1.0"
+authors = ["Michael"]
+edition = "2021"
+license = "MIT"
+
+[dependencies]
+embedded-hal = "0.2"
+esp-hal = "0.17"
+esp-backtrace = "0.11"
+esp-println = "0.9"
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+
+[profile.dev]
+opt-level = 1
+debug = true

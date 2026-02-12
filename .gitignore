@@ -1,0 +1,35 @@
+# Rust
+target/
+Cargo.lock
+**/*.rs.bk
+*.pdb
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+.directory
+
+# Build artifacts
+*.bin
+*.hex
+*.elf
+*.map
+
+# Python (for scripts)
+__pycache__/
+*.py[cod]
+.venv/
+
+# Logs
+*.log
+
+# Local config
+.env
+secrets.toml
