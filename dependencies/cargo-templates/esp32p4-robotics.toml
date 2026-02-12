@@ -1,0 +1,77 @@
+[package]
+name = "esp32p4-robot"
+version = "0.1.0"
+authors = ["Michael"]
+edition = "2021"
+license = "MIT"
+
+[dependencies]
+# ESP32-P4 HAL (RISC-V dual-core)
+esp-hal = { version = "0.17", features = ["esp32p4"] }
+esp-backtrace = { version = "0.11", features = ["esp32p4", "panic-handler", "exception-handler", "println"] }
+esp-println = { version = "0.9", features = ["esp32p4"] }
+esp-alloc = "0.3"
+
+# Async runtime - Embassy
+embassy-executor = { version = "0.5", features = ["arch-riscv32", "executor-thread", "integrated-timers"] }
+embassy-time = { version = "0.3", features = ["generic-queue"] }
+embassy-sync = "0.5"
+
+# ESP32-P4 specific features
+esp-wifi = { version = "0.5", features = ["esp32p4", "async", "embassy-net"] }
+embassy-net = { version = "0.4", features = ["tcp", "udp", "dns", "dhcpv4"] }
+
+# Embedded HAL
+embedded-hal = "1.0"
+embedded-hal-async = "1.0"
+embedded-io = "0.6"
+embedded-io-async = "0.6"
+
+# High-performance sensor processing (P4's advantage)
+mpu6050 = "0.1"
+bno055 = "1.0"  # 9-axis IMU with sensor fusion
+vl53l1x = "1.0"  # Long-range ToF
+
+# Camera support (P4 has hardware JPEG encoder)
+# esp-camera = { git = "https://github.com/esp-rs/esp-camera" }  # When available
+
+# Motor control with dual-core advantage
+pwm-pca9685 = "0.3"
+
+# Math for real-time processing
+nalgebra = { version = "0.32", default-features = false, features = ["libm"] }
+micromath = "2.0"
+fixed = "1.24"
+
+# Signal processing (for sensor data)
+microfft = "0.5"  # FFT for vibration analysis
+
+# PID control
+pid = { version = "4.0", default-features = false }
+
+# Kalman filtering
+adskalman = { version = "0.5", default-features = false }
+
+# Heapless data structures
+heapless = "0.8"
+
+# Serialization
+serde = { version = "1.0", default-features = false, features = ["derive"] }
+postcard = "1.0"  # Efficient binary serialization
+
+# Static cell for async
+static_cell = "2.0"
+
+[profile.release]
+opt-level = 3        # Max optimization for P4's dual-core
+lto = "fat"          # Aggressive LTO
+codegen-units = 1
+strip = true
+
+[profile.dev]
+opt-level = 1
+debug = true
+
+# ESP32-P4 build configuration
+[build]
+target = "riscv32imafc-unknown-none-elf"  # P4 is RISC-V with FPU
