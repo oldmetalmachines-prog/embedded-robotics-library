@@ -1,0 +1,16 @@
+[package]
+name = "rpi-ros2-robot"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+r2r = "0.8"
+rppal = { version = "0.17", features = ["hal"] }
+tokio = { version = "1", features = ["full"] }
+mpu6050 = "0.1"
+nalgebra = "0.32"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+anyhow = "1.0"
+log = "0.4"
+env_logger = "0.11"

@@ -1,0 +1,153 @@
+.
+├── awesome-embedded-rust
+│   ├── Code-of-Conduct.md
+│   ├── CODE_OF_CONDUCT.md
+│   ├── CONTRIBUTING.md
+│   ├── LICENSE-CC0
+│   ├── README.md
+│   └── rust-embedded-logo-256x256.png
+├── awesome-esp-rust
+│   ├── LICENSE
+│   └── README.md
+├── common
+│   ├── algorithms
+│   ├── ALGORITHMS.md
+│   ├── filters
+│   ├── math
+│   └── pid-control
+├── dependencies
+│   ├── cargo-templates
+│   │   ├── esp32p4-robotics.toml
+│   │   ├── esp32-project-template.toml
+│   │   ├── esp32-robotics-nostd.toml
+│   │   ├── esp32-robotics-std.toml
+│   │   └── raspberry-pi-robotics.toml
+│   └── crate-configs
+│       └── rust-toolchain.toml
+├── docs
+│   ├── hardware-specs
+│   ├── references
+│   │   └── awesome-esp-rust.md
+│   ├── setup-guides
+│   └── troubleshooting
+├── esp32
+│   ├── communication
+│   │   ├── bluetooth
+│   │   ├── i2c
+│   │   ├── spi
+│   │   ├── uart
+│   │   └── wifi
+│   ├── examples
+│   │   ├── snake-complete
+│   │   │   ├── main.rs
+│   │   │   └── SOURCE.md
+│   │   ├── snake-game
+│   │   │   ├── main.rs
+│   │   │   └── SOURCE.md
+│   │   ├── std-demo
+│   │   │   ├── main.rs
+│   │   │   └── SOURCE.md
+│   │   └── wifi-tank
+│   │       ├── main.rs
+│   │       ├── motors.rs
+│   │       └── SOURCE.md
+│   ├── motors
+│   │   ├── brushless
+│   │   ├── pwm-control
+│   │   ├── servo
+│   │   └── stepper
+│   ├── p4-specific
+│   │   └── README.md
+│   └── sensors
+│       ├── camera
+│       ├── gps
+│       ├── imu
+│       │   └── README.md
+│       ├── lidar
+│       ├── temperature-logger
+│       │   ├── bmp180.rs
+│       │   ├── main.rs
+│       │   ├── SOURCE.md
+│       │   └── tiny_mqtt.rs
+│       └── ultrasonic
+├── LICENSE
+├── populate-library.sh
+├── raspberry-pi
+│   ├── gpio
+│   │   └── rppal-examples
+│   │       ├── gpio_blinkled.rs
+│   │       ├── gpio_blinkled_signals.rs
+│   │       ├── gpio_multithreaded_mpsc.rs
+│   │       ├── gpio_multithreaded_mutex.rs
+│   │       ├── gpio_servo_softpwm.rs
+│   │       ├── gpio_shared_button_state.rs
+│   │       ├── gpio_status.rs
+│   │       ├── i2c_ds3231.rs
+│   │       ├── pwm_blinkled.rs
+│   │       ├── pwm_servo.rs
+│   │       ├── README.md
+│   │       ├── SOURCE.md
+│   │       ├── spi_25aa1024.rs
+│   │       └── uart_blocking_read.rs
+│   ├── peripherals
+│   └── ros2-integration
+│       └── SETUP.md
+├── README.md
+├── repo-structure.txt
+└── rppal
+    ├── Cargo.toml
+    ├── CHANGELOG.md
+    ├── CONTRIBUTING.md
+    ├── examples
+    │   ├── gpio_blinkled.rs
+    │   ├── gpio_blinkled_signals.rs
+    │   ├── gpio_multithreaded_mpsc.rs
+    │   ├── gpio_multithreaded_mutex.rs
+    │   ├── gpio_servo_softpwm.rs
+    │   ├── gpio_shared_button_state.rs
+    │   ├── gpio_status.rs
+    │   ├── i2c_ds3231.rs
+    │   ├── pwm_blinkled.rs
+    │   ├── pwm_servo.rs
+    │   ├── README.md
+    │   ├── spi_25aa1024.rs
+    │   └── uart_blocking_read.rs
+    ├── LICENSE
+    ├── README.md
+    ├── rustfmt.toml
+    └── src
+        ├── gpio
+        │   ├── epoll.rs
+        │   ├── gpiomem
+        │   ├── gpiomem.rs
+        │   ├── hal.rs
+        │   ├── hal_unproven.rs
+        │   ├── interrupt.rs
+        │   ├── ioctl.rs
+        │   ├── pin.rs
+        │   └── soft_pwm.rs
+        ├── gpio.rs
+        ├── hal.rs
+        ├── i2c
+        │   ├── hal.rs
+        │   └── ioctl.rs
+        ├── i2c.rs
+        ├── lib.rs
+        ├── macros.rs
+        ├── pwm
+        │   ├── hal.rs
+        │   ├── hal_unproven.rs
+        │   └── sysfs.rs
+        ├── pwm.rs
+        ├── spi
+        │   ├── hal.rs
+        │   ├── ioctl.rs
+        │   └── segment.rs
+        ├── spi.rs
+        ├── system.rs
+        ├── uart
+        │   ├── hal.rs
+        │   └── termios.rs
+        └── uart.rs
+
+55 directories, 96 files
