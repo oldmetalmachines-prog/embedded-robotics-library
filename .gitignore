@@ -33,3 +33,8 @@ __pycache__/
 # Local config
 .env
 secrets.toml
+
+# Rust build outputs
+/target/
+**/target/
+
