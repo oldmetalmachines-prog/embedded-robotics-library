@@ -11,3 +11,4 @@ MD012: false   # multiple consecutive blank lines
 MD026: false   # trailing punctuation in headings
 MD034: false   # bare URLs
 MD036: false   # emphasis used instead of a heading
+MD029: false   # ordered list numbering
