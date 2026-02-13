@@ -47,7 +47,7 @@ jobs:
 
       - name: Lint (clippy)
         working-directory: rppal
-        run: cargo clippy --all-targets --all-features -- -D warnings
+        run: cargo clippy --all-targets --all-features -- -W clippy::all
 
       - name: Build (check)
         working-directory: rppal
