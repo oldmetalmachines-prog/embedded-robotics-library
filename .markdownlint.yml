@@ -12,3 +12,8 @@ MD026: false   # trailing punctuation in headings
 MD034: false   # bare URLs
 MD036: false   # emphasis used instead of a heading
 MD029: false   # ordered list numbering
+
+MD033: false   # inline HTML (e.g., <kbd>)
+MD004: false   # unordered list style (* vs -)
+MD024: false   # duplicate headings
+MD047: false   # file must end with single newline
