@@ -6,3 +6,8 @@ MD031: false   # fenced code blocks spacing
 MD032: false   # list spacing
 MD040: false   # fenced code language
 MD009: false   # trailing spaces
+
+MD012: false   # multiple consecutive blank lines
+MD026: false   # trailing punctuation in headings
+MD034: false   # bare URLs
+MD036: false   # emphasis used instead of a heading
