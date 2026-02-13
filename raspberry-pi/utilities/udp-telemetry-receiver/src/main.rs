@@ -1,135 +1,88 @@
+use std::env;
+use std::fs::{File, OpenOptions};
+use std::io::{self, Write};
 use std::net::UdpSocket;
-use serde::Deserialize;
-use chrono::Local;
-use colored::*;
+use std::path::Path;
+use std::time::{SystemTime, UNIX_EPOCH};
 
-// Telemetry v1 Schema Structs
-#[derive(Deserialize, Debug)]
-struct TelemetryHeader {
-    device_id: String,
-    timestamp: u64,
-    sequence: u32,
-    message_type: String,
+fn now_ms() -> u128 {
+    SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .unwrap_or_default()
+        .as_millis()
 }
 
-#[derive(Deserialize, Debug)]
-struct ImuData {
-    accel_x: f32,
-    accel_y: f32,
-    accel_z: f32,
-    gyro_x: f32,
-    gyro_y: f32,
-    gyro_z: f32,
-    temperature_c: f32,
+fn open_append(path: &str) -> io::Result<File> {
+    OpenOptions::new().create(true).append(true).open(path)
 }
 
-#[derive(Deserialize, Debug)]
-struct TelemetryData {
-    imu: Option<ImuData>,
+fn ensure_csv_header(path: &str) -> io::Result<()> {
+    let p = Path::new(path);
+    let need_header = !p.exists() || p.metadata().map(|m| m.len()).unwrap_or(0) == 0;
+    if need_header {
+        let mut f = open_append(path)?;
+        writeln!(f, "ts_ms,src_ip,src_port,len,payload_utf8")?;
+    }
+    Ok(())
 }
 
-#[derive(Deserialize, Debug)]
-struct TelemetryMessage {
-    header: TelemetryHeader,
-    telemetry: Option<TelemetryData>,
-}
+fn main() -> io::Result<()> {
+    // Args:
+    // 1: bind addr (default 0.0.0.0:9000)
+    // 2: jsonl path (default telemetry.jsonl)
+    // 3: csv path (default telemetry.csv)
+    // 4: mode: jsonl|csv|both (default both)
+    let args: Vec<String> = env::args().collect();
 
-fn main() -> std::io::Result<()> {
-    println!("{}", "=== UDP Telemetry Receiver ===".bright_cyan().bold());
-    println!("Listening on 0.0.0.0:8888 for telemetry packets\n");
+    let bind_addr = args.get(1).map(String::as_str).unwrap_or("0.0.0.0:9000");
+    let jsonl_path = args.get(2).map(String::as_str).unwrap_or("telemetry.jsonl");
+    let csv_path = args.get(3).map(String::as_str).unwrap_or("telemetry.csv");
+    let mode = args.get(4).map(String::as_str).unwrap_or("both");
 
-    // Bind to all interfaces on port 8888
-    let socket = UdpSocket::bind("0.0.0.0:8888")?;
-    println!("{}", "✓ UDP socket bound successfully".green());
-    println!("{}", "Waiting for telemetry data...\n".yellow());
+    let write_jsonl = mode == "jsonl" || mode == "both";
+    let write_csv = mode == "csv" || mode == "both";
 
-    let mut buffer = [0u8; 2048];
-    let mut last_seq: Option<u32> = None;
-    let mut packet_count = 0u64;
-    let mut error_count = 0u64;
+    if write_csv {
+        ensure_csv_header(csv_path)?;
+    }
+
+    let socket = UdpSocket::bind(bind_addr)?;
+    eprintln!("udp-telemetry-receiver listening on {}", bind_addr);
+    eprintln!("mode={}, jsonl={}, csv={}", mode, jsonl_path, csv_path);
+
+    let mut buf = [0u8; 2048];
 
     loop {
-        match socket.recv_from(&mut buffer) {
-            Ok((size, src)) => {
-                packet_count += 1;
+        let (n, src) = socket.recv_from(&mut buf)?;
+        let ts = now_ms();
 
-                // Parse JSON
-                match serde_json::from_slice::<TelemetryMessage>(&buffer[..size]) {
-                    Ok(msg) => {
-                        let now = Local::now().format("%H:%M:%S%.3f");
+        let payload = &buf[..n];
+        let payload_utf8 = match std::str::from_utf8(payload) {
+            Ok(s) => s.replace('\n', "\\n").replace('\r', "\\r"),
+            Err(_) => "<non-utf8>".to_string(),
+        };
 
-                        // Check for packet loss
-                        if let Some(prev_seq) = last_seq {
-                            let expected = prev_seq.wrapping_add(1);
-                            if msg.header.sequence != expected && msg.header.sequence != 0 {
-                                let lost = if msg.header.sequence > expected {
-                                    msg.header.sequence - expected
-                                } else {
-                                    1  // Sequence wrapped
-                                };
-                                println!("{} {} packets", 
-                                    "⚠️  Lost".yellow(),
-                                    lost);
-                            }
-                        }
-                        last_seq = Some(msg.header.sequence);
+        if write_jsonl {
+            let mut f = open_append(jsonl_path)?;
+            let payload_escaped = payload_utf8.replace('\\', "\\\\").replace('"', "\\\"");
+            writeln!(
+                f,
+                "{{\"ts_ms\":{},\"src\":\"{}\",\"len\":{},\"payload_utf8\":\"{}\"}}",
+                ts, src, n, payload_escaped
+            )?;
+        }
 
-                        // Display header
-                        println!("{} {} {} seq={} from {}",
-                            format!("[{}]", now).bright_black(),
-                            msg.header.device_id.bright_blue(),
-                            msg.header.message_type.bright_green(),
-                            msg.header.sequence.to_string().bright_white(),
-                            src.to_string().bright_black()
-                        );
-
-                        // Display IMU data if present
-                        if let Some(telemetry) = msg.telemetry {
-                            if let Some(imu) = telemetry.imu {
-                                println!("  {} Accel: ({:6.2}, {:6.2}, {:6.2}) m/s²",
-                                    "📊".bright_yellow(),
-                                    imu.accel_x, imu.accel_y, imu.accel_z
-                                );
-                                println!("  {} Gyro:  ({:6.2}, {:6.2}, {:6.2}) deg/s",
-                                    "🔄".bright_cyan(),
-                                    imu.gyro_x, imu.gyro_y, imu.gyro_z
-                                );
-                                println!("  {} Temp:  {:.1}°C",
-                                    "🌡️ ".bright_magenta(),
-                                    imu.temperature_c
-                                );
-                            }
-                        }
-
-                        // Stats every 100 packets
-                        if packet_count % 100 == 0 {
-                            let success_rate = 
-                                (packet_count as f64 / (packet_count + error_count) as f64) * 100.0;
-                            println!("{} Received: {}, Errors: {}, Success: {:.1}%\n",
-                                "📈".bright_white(),
-                                packet_count.to_string().bright_green(),
-                                error_count.to_string().bright_red(),
-                                success_rate
-                            );
-                        }
-                    }
-                    Err(e) => {
-                        error_count += 1;
-                        eprintln!("{} JSON parse error: {} (size: {} bytes)",
-                            "❌".bright_red(),
-                            e,
-                            size
-                        );
-                        // Show raw data for debugging
-                        if let Ok(s) = std::str::from_utf8(&buffer[..size]) {
-                            eprintln!("   Raw: {}", s);
-                        }
-                    }
-                }
-            }
-            Err(e) => {
-                eprintln!("{} Socket error: {}", "❌".bright_red(), e);
-            }
+        if write_csv {
+            let mut f = open_append(csv_path)?;
+            writeln!(
+                f,
+                "{},{},{},{},\"{}\"",
+                ts,
+                src.ip(),
+                src.port(),
+                n,
+                payload_utf8.replace('"', "\"\"")
+            )?;
         }
     }
 }
