@@ -1,0 +1,11 @@
+[submodule "awesome-embedded-rust"]
+	path = awesome-embedded-rust
+	url = https://github.com/rust-embedded/awesome-embedded-rust.git
+
+[submodule "awesome-esp-rust"]
+	path = awesome-esp-rust
+	url = https://github.com/esp-rs/awesome-esp-rust.git
+
+[submodule "rppal"]
+	path = rppal
+	url = https://github.com/golemparts/rppal.git
