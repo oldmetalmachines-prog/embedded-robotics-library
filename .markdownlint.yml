@@ -1,0 +1,8 @@
+default: true
+
+MD013: false   # line length
+MD022: false   # headings spacing
+MD031: false   # fenced code blocks spacing
+MD032: false   # list spacing
+MD040: false   # fenced code language
+MD009: false   # trailing spaces
