@@ -68,6 +68,7 @@ Complete index of all working examples in this library, organized by platform an
 | `raspberry-pi/gpio/rppal-examples/gpio_status.rs` | Button input | Pi, button | ⭐ Beginner |
 | `raspberry-pi/gpio/rppal-examples/pwm_blinkled.rs` | PWM LED fade | Pi, LED, resistor | ⭐⭐ Intermediate |
 | `raspberry-pi/gpio/rppal-examples/pwm_servo.rs` | Control servo | Pi, servo motor | ⭐⭐ Intermediate |
+| `raspberry-pi/gpio/servo-controller/` | Servo controller CLI (angle→pulse) | Pi, servo, external 5V | ⭐⭐ Intermediate |
 | `raspberry-pi/gpio/rppal-examples/i2c_ds3231.rs` | I2C RTC clock | Pi, DS3231, pull-ups | ⭐⭐ Intermediate |
 | `raspberry-pi/gpio/rppal-examples/spi_25aa1024.rs` | SPI EEPROM | Pi, 25AA1024 chip | ⭐⭐⭐ Advanced |
 | `raspberry-pi/gpio/rppal-examples/uart_blocking_read.rs` | Serial communication | Pi, UART device | ⭐⭐ Intermediate |
