@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  markdown:
+    name: Markdown checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      # Basic markdown linting (non-blocking rules are minimized)
+      - name: Run markdownlint
+        uses: DavidAnson/markdownlint-cli2-action@v16
+        with:
+          globs: |
+            **/*.md
+            !**/node_modules/**
+
+  rppal:
+    name: Rust checks (rppal)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Rust toolchain (stable)
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: 1.93.0
+          components: rustfmt, clippy
+
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: |
+            rppal -> target
+
+      - name: Format (rustfmt)
+        working-directory: rppal
+        run: cargo fmt --all -- --check
+
+      - name: Lint (clippy)
+        working-directory: rppal
+        run: cargo clippy --all-targets --all-features -- -W clippy::all
+
+      - name: Build (check)
+        working-directory: rppal
+        run: cargo check --all-targets --all-features
