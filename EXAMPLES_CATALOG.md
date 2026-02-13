@@ -92,16 +92,19 @@ Complete index of all working examples in this library, organized by platform an
 
 ### Jetson Orin Nano Super
 
-#### 🎥 Streaming
-| Example | Purpose | Hardware Needed | Difficulty |
-|---------|---------|-----------------|------------|
-| `jetson-orin/examples/rtsp-camera-streamer/` | RTSP test-stream server (GStreamer) | Jetson, network | ⭐⭐ Intermediate |
-
-
 #### 🔌 GPIO Examples
 | Example | Purpose | Hardware Needed | Difficulty |
 |---------|---------|-----------------|------------|
 | `jetson-orin/examples/gpio-blink/` | GPIO LED blink | Jetson, LED, resistor | ⭐ Beginner |
+
+#### 🎥 Computer Vision
+| Example | Purpose | Hardware Needed | Difficulty |
+|---------|---------|-----------------|------------|
+| `jetson-orin/examples/rtsp-camera-streamer/` | RTSP camera stream (WIP) | Jetson, CSI/USB camera | ⭐⭐ Intermediate |
+
+**Note:** RTSP example is Work In Progress - basic structure complete, implementation pending
+
+
 
 #### 🎥 Computer Vision (Coming Soon)
 - Camera capture with opencv-rust
