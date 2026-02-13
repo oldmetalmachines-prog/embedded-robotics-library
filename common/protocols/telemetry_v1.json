@@ -1,0 +1,152 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Robot Telemetry v1",
+  "description": "Standard telemetry message format for all devices",
+  "version": "1.0.0",
+  
+  "message": {
+    "header": {
+      "device_id": "string (unique identifier, e.g., 'esp32-rover-01')",
+      "timestamp": "integer (Unix timestamp in milliseconds)",
+      "sequence": "integer (message sequence number, wraps at u32::MAX)",
+      "message_type": "string (enum: 'telemetry', 'command', 'status', 'error')"
+    },
+    
+    "telemetry": {
+      "battery": {
+        "voltage_mv": "integer (millivolts, e.g., 3700 = 3.7V)",
+        "current_ma": "integer (milliamps, positive = discharging)",
+        "percentage": "integer (0-100, estimated capacity)"
+      },
+      
+      "imu": {
+        "accel_x": "float (m/s², typically -20 to +20)",
+        "accel_y": "float (m/s²)",
+        "accel_z": "float (m/s²)",
+        "gyro_x": "float (deg/s, typically -250 to +250)",
+        "gyro_y": "float (deg/s)",
+        "gyro_z": "float (deg/s)",
+        "temperature_c": "float (°C, from IMU sensor)"
+      },
+      
+      "orientation": {
+        "roll": "float (degrees, -180 to +180)",
+        "pitch": "float (degrees, -90 to +90)",
+        "yaw": "float (degrees, 0 to 360)"
+      },
+      
+      "distance": {
+        "front_mm": "integer (millimeters, 0 = no reading)",
+        "back_mm": "integer (millimeters)",
+        "left_mm": "integer (millimeters)",
+        "right_mm": "integer (millimeters)"
+      },
+      
+      "environment": {
+        "temperature_c": "float (°C, ambient)",
+        "humidity_percent": "float (0-100)",
+        "pressure_pa": "integer (pascals)"
+      },
+      
+      "motors": {
+        "left_speed": "integer (-255 to +255, PWM value)",
+        "right_speed": "integer (-255 to +255)",
+        "left_current_ma": "integer (milliamps)",
+        "right_current_ma": "integer (milliamps)"
+      },
+      
+      "gps": {
+        "latitude": "float (degrees, -90 to +90)",
+        "longitude": "float (degrees, -180 to +180)",
+        "altitude_m": "float (meters above sea level)",
+        "satellites": "integer (number of satellites)",
+        "hdop": "float (horizontal dilution of precision)"
+      },
+      
+      "wifi": {
+        "rssi_dbm": "integer (signal strength, typically -30 to -90)",
+        "ip_address": "string (e.g., '192.168.1.100')"
+      },
+      
+      "status": {
+        "uptime_ms": "integer (milliseconds since boot)",
+        "free_heap_bytes": "integer (available memory)",
+        "cpu_usage_percent": "integer (0-100)"
+      }
+    },
+    
+    "commands": {
+      "velocity": {
+        "linear": "float (m/s, forward/backward)",
+        "angular": "float (rad/s, rotation)"
+      },
+      
+      "servo": {
+        "servo_id": "integer (0-15)",
+        "angle_degrees": "integer (0-180)"
+      },
+      
+      "led": {
+        "red": "integer (0-255)",
+        "green": "integer (0-255)",
+        "blue": "integer (0-255)"
+      }
+    }
+  },
+  
+  "examples": {
+    "telemetry_message": {
+      "header": {
+        "device_id": "esp32-rover-01",
+        "timestamp": 1707782400000,
+        "sequence": 12345,
+        "message_type": "telemetry"
+      },
+      "telemetry": {
+        "battery": {
+          "voltage_mv": 3700,
+          "current_ma": 250,
+          "percentage": 75
+        },
+        "imu": {
+          "accel_x": 0.02,
+          "accel_y": 0.01,
+          "accel_z": 9.81,
+          "gyro_x": 0.0,
+          "gyro_y": -0.5,
+          "gyro_z": 0.1,
+          "temperature_c": 23.5
+        },
+        "distance": {
+          "front_mm": 450,
+          "back_mm": 0,
+          "left_mm": 1200,
+          "right_mm": 800
+        }
+      }
+    },
+    
+    "command_message": {
+      "header": {
+        "device_id": "control-station",
+        "timestamp": 1707782401000,
+        "sequence": 789,
+        "message_type": "command"
+      },
+      "commands": {
+        "velocity": {
+          "linear": 0.5,
+          "angular": 0.2
+        }
+      }
+    }
+  },
+  
+  "notes": {
+    "units": "Always use SI units where possible (meters, seconds, pascals)",
+    "optional_fields": "Any field can be omitted if not available (e.g., no GPS = omit gps object)",
+    "timestamps": "Unix timestamp in milliseconds for consistency across devices",
+    "endianness": "Little-endian for binary serialization",
+    "max_message_size": "UDP: 512 bytes recommended, TCP: 4096 bytes max"
+  }
+}
