@@ -44,7 +44,7 @@ fn main() -> std::io::Result<()> {
     println!("{}", "Waiting for telemetry data...\n".yellow());
 
     let mut buffer = [0u8; 2048];
-    let mut last_seq = None;
+    let mut last_seq: Option<u32> = None;
     let mut packet_count = 0u64;
     let mut error_count = 0u64;
 
