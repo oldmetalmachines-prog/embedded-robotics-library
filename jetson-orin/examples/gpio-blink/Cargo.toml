@@ -1,0 +1,11 @@
+[package]
+name = "jetson-gpio-blink"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+gpio-cdev = "0.6"
+anyhow = "1.0"
+
+[profile.release]
+opt-level = 3

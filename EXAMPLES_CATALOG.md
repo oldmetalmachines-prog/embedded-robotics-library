@@ -100,7 +100,19 @@ Complete index of all working examples in this library, organized by platform an
 1. **I2C IMU** - `esp32/sensors/examples/mpu6050-basic.rs`
 2. **I2C RTC** - `raspberry-pi/gpio/rppal-examples/i2c_ds3231.rs`
 3. **Distance Sensor** - `esp32/sensors/examples/vl53l0x-distance.rs`
+---
 
+### Jetson Orin Nano Super
+
+#### 🔌 GPIO Examples
+| Example | Purpose | Hardware Needed | Difficulty |
+|---------|---------|-----------------|------------|
+| `jetson-orin/examples/gpio-blink/` | GPIO LED blink | Jetson, LED, resistor | ⭐ Beginner |
+
+#### 🎥 Computer Vision (Coming Soon)
+- Camera capture with opencv-rust
+- CUDA-accelerated object detection
+- ROS2 vision integration
 ### Wireless Communication
 1. **UDP Sender** - `esp32/communication/wifi/udp-telemetry-sender/`
 2. **UDP Receiver** - `raspberry-pi/utilities/udp-telemetry-receiver/`
