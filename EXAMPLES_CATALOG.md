@@ -89,19 +89,6 @@ Complete index of all working examples in this library, organized by platform an
 
 ---
 
-## 🎓 By Learning Topic
-
-### First Steps (Absolute Beginners)
-1. **Blink LED** - `raspberry-pi/gpio/rppal-examples/gpio_blinkled.rs` (Pi) or `raspberry-pi/pico-2w/examples/led-blink/` (Pico 2W)
-2. **I2C Scanner** - `esp32/utilities/i2c-scanner/` (ESP32)
-3. **Read Button** - `raspberry-pi/gpio/rppal-examples/gpio_status.rs` (Pi)
-
-### Sensor Reading
-1. **I2C IMU** - `esp32/sensors/examples/mpu6050-basic.rs`
-2. **I2C RTC** - `raspberry-pi/gpio/rppal-examples/i2c_ds3231.rs`
-3. **Distance Sensor** - `esp32/sensors/examples/vl53l0x-distance.rs`
----
-
 ### Jetson Orin Nano Super
 
 #### 🔌 GPIO Examples
@@ -113,17 +100,20 @@ Complete index of all working examples in this library, organized by platform an
 - Camera capture with opencv-rust
 - CUDA-accelerated object detection
 - ROS2 vision integration
-### Wireless Communication
-1. **UDP Sender** - `esp32/communication/wifi/udp-telemetry-sender/`
-2. **UDP Receiver** - `raspberry-pi/utilities/udp-telemetry-receiver/`
-3. **MQTT Logger** - `esp32/sensors/temperature-logger/`
 
-### Motor Control
-1. **Servo Control** - `raspberry-pi/gpio/rppal-examples/pwm_servo.rs`
-2. **WiFi Tank** - `esp32/examples/wifi-tank/`
+---
 
-### ROS2 Robotics
-1. **ROS2 Setup** - `raspberry-pi/ros2-integration/SETUP.md`
+## 🎓 By Learning Topic
+
+### First Steps (Absolute Beginners)
+1. **Blink LED** - `raspberry-pi/gpio/rppal-examples/gpio_blinkled.rs` (Pi) or `raspberry-pi/pico-2w/examples/led-blink/` (Pico 2W)
+2. **I2C Scanner** - `esp32/utilities/i2c-scanner/` (ESP32)
+3. **Read Button** - `raspberry-pi/gpio/rppal-examples/gpio_status.rs` (Pi)
+
+### Sensor Reading
+1. **I2C IMU** - `esp32/sensors/examples/mpu6050-basic.rs`
+2. **I2C RTC** - `raspberry-pi/gpio/rppal-examples/i2c_ds3231.rs`
+3. **Distance Sensor** - `esp32/sensors/examples/vl53l0x-distance.rs`
 2. **IMU Publisher** - `raspberry-pi/ros2-integration/examples/ros2_imu_publisher.rs`
 3. **Motor Controller** - `raspberry-pi/ros2-integration/examples/ros2_motor_controller.rs`
 
