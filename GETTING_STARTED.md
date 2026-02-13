@@ -11,11 +11,11 @@ A curated collection of Rust embedded code for ESP32, Raspberry Pi, and robotics
 ### ESP32 Development
 
 #### Examples (5 complete projects)
- - **esp32/examples/snake-game/** - OLED display + joystick game
- - **esp32/examples/snake-complete/** - Complete version with full features
- - **esp32/examples/wifi-tank/** - WiFi controlled robot with motors
- - **esp32/examples/std-demo/** - WiFi + HTTP server + LED screen
-- **temperature-logger** - MQTT + BMP180 sensor
+- **esp32/examples/snake-game/** - OLED display + joystick game
+- **esp32/examples/snake-complete/** - Complete version with full features
+- **esp32/examples/wifi-tank/** - WiFi controlled robot with motors
+- **esp32/examples/std-demo/** - WiFi + HTTP server + LED screen
+- **esp32/sensors/temperature-logger/** - MQTT + BMP180 sensor
 
 #### Sensor Examples (3 working examples)
 - **mpu6050-basic.rs** - 6-axis IMU (accelerometer + gyroscope)
