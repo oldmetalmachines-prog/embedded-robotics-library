@@ -1,0 +1,13 @@
+[package]
+name = "rtsp-camera-streamer"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
+
+# Stable set (glib has stable 0.21.x)
+gstreamer = "0.21"
+gstreamer-rtsp-server = "0.21"
+glib = "0.21"
