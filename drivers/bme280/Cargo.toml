@@ -1,0 +1,10 @@
+[package]
+name = "bme280-driver"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Minimal embedded-hal BME280 driver"
+repository = "https://github.com/oldmetalmachines-prog/rust-embedded-library"
+
+[dependencies]
+embedded-hal = "0.2"
