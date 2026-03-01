@@ -5,9 +5,8 @@ edition = "2021"
 
 [dependencies]
 esp-hal = { version = "0.17", features = ["esp32s3"] }
-esp-backtrace = { version = "0.11", features = ["esp32s3", "panic-handler", "println"] }
-esp-println = { version = "0.9", features = ["esp32s3"] }
-
+esp-backtrace = { version = "0.18.1", features = ["esp32s3", "panic-handler"] }
+esp-println = { version = "0.16.1", features = ["esp32s3"] }
 [profile.release]
 opt-level = "z"
 lto = true
