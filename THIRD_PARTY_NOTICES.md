@@ -41,3 +41,12 @@ If you remove a vendored directory in favor of a submodule or external link, upd
 ## Yaskawa / Industrial Servo (referenced/adapted code)
 
 - IGH-EtherCAT-motor-control-sample — https://github.com/CalvinHsu1223/IGH-EtherCAT-motor-control-sample — Author: CalvinHsu1223 — License: See repository
+
+---
+
+## OBD9141
+- **Location:** obd2-diagnostics/cpp/obd9141/
+- **Source:** https://github.com/iwanders/OBD9141
+- **Author:** Ivor Wanders
+- **License:** MIT
+- **Purpose:** ISO 9141-2 and ISO 14230 (KWP2000) K-Line OBD-II diagnostics for pre-CAN vehicles. Supports Arduino, ESP32, Teensy.
