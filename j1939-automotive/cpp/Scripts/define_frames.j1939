@@ -1,0 +1,55 @@
+create frame name: ccvs title: CCVS
+create frame name: eec1 title: EEC1
+create frame name: lfc title: LFC
+create frame name: vdhr title: VDHR
+create frame name: dd title: DD
+create frame name: efl title: EFL
+create frame name: vin title: VI
+create frame name: di title: DI
+create frame name: tco1 title: TCO1
+create frame name: et1 title: ET1
+create frame name: trf1 title: TRF1
+create frame name: eec2 title: EEC2
+create frame name: vdc2 title: VDC2
+create frame name: ic1 title: IC1
+create frame name: amb title: AMB
+create frame name: rf title: RF
+create frame name: hours title: HOURS
+create frame name: etc1 title: ETC1
+create frame name: etc2 title: ETC2
+create frame name: erc1 title: ERC1
+create frame name: ebc1 title: EBC1
+create frame name: as title: AS
+create frame name: at1t1i title: AT1T1I
+create frame name: dc1 title: DC1
+create frame name: dc2 title: DC2
+create frame name: ptode title: PTODE
+
+
+
+set frame ccvs period: 100 priority: 2 source: 20
+set frame ptode period: 100 priority: 2 source: 20
+set frame eec1 period: 20 priority: 2 source: 20
+set frame lfc period: 1000 priority: 2 source: 20
+set frame vdhr period: 1000 priority: 2 source: 20
+set frame dd period: 1000 priority: 2 source: 20
+set frame dc1 period: 100 priority: 2 source: 20
+set frame dc2 period: 100 priority: 2 source: 20
+set frame efl period: 500 priority: 2 source: 20
+set frame et1 period: 1000 priority: 2 source: 20
+set frame tco1 period: 50 priority: 2 source: 20
+set frame vin period: 10000 priority: 2 source: 20
+set frame di period: 10000 priority: 2 source: 20
+set frame trf1 period: 1000 priority: 2 source: 20
+set frame eec2 period: 50 priority: 2 source: 20
+set frame vdc2 period: 10 priority: 2 source: 20
+set frame ic1 period: 500 priority: 2 source: 20
+set frame amb period: 1000 priority: 2 source: 20
+set frame rf period: 1000 priority: 2 source: 20
+set frame hours period: 5000 priority: 2 source: 20
+set frame etc1 period: 10 priority: 2 source: 20
+set frame etc2 period: 10 priority: 2 source: 20
+set frame erc1 period: 50 priority: 2 source: 20
+set frame ebc1 period: 100 priority: 2 source: 20
+set frame as period: 1000 priority: 2 source: 20
+set frame at1t1i period: 1000 priority: 2 source: 20
