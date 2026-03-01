@@ -31,3 +31,13 @@ If you remove a vendored directory in favor of a submodule or external link, upd
 - tb6612fng — https://github.com/jacobrosenthal/tb6612fng-rs — License: MIT
 - tmc2209_pi — https://github.com/andrewseidl/tmc2209_pi — License: MIT
 - esp-drv8833 — https://github.com/nguterresn/esp-drv8833 — License: MIT
+
+## J1939 / Automotive CAN (referenced/adapted code)
+
+- Open-SAE-J1939 — https://github.com/DanielMartensson/Open-SAE-J1939 — Author: Daniel Mårtensson — License: MIT
+- J1939-Framework — https://github.com/famez/J1939-Framework — Author: famez — License: GPL-3.0
+- python-can-j1939 — https://github.com/juergenH87/python-can-j1939 — Author: juergenH87 — License: MIT
+
+## Yaskawa / Industrial Servo (referenced/adapted code)
+
+- IGH-EtherCAT-motor-control-sample — https://github.com/CalvinHsu1223/IGH-EtherCAT-motor-control-sample — Author: CalvinHsu1223 — License: See repository
