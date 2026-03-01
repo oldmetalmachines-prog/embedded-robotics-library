@@ -50,3 +50,48 @@ If you remove a vendored directory in favor of a submodule or external link, upd
 - **Author:** Ivor Wanders
 - **License:** MIT
 - **Purpose:** ISO 9141-2 and ISO 14230 (KWP2000) K-Line OBD-II diagnostics for pre-CAN vehicles. Supports Arduino, ESP32, Teensy.
+
+---
+
+## jetson-gpio
+- **Location:** jetson-ros2/gpio/python/jetson-gpio/
+- **Source:** https://github.com/NVIDIA/jetson-gpio
+- **Author:** NVIDIA Corporation
+- **License:** MIT
+- **Purpose:** Official NVIDIA Python library for Jetson GPIO control (Orin, AGX, Nano, Xavier)
+
+---
+
+## JetsonXavierGPIO
+- **Location:** jetson-ros2/gpio/cpp/jetson-xavier-gpio/
+- **Source:** https://github.com/gaosiy/JetsonXavierGPIO
+- **Author:** gaosiy
+- **License:** MIT
+- **Purpose:** C/C++ sysfs GPIO interface for Jetson AGX Xavier
+
+---
+
+## isaac_ros_jetson
+- **Location:** jetson-ros2/isaac-ros/isaac_ros_jetson/
+- **Source:** https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_jetson
+- **Author:** NVIDIA Corporation
+- **License:** Apache-2.0
+- **Purpose:** ROS2 Jetson stats, power monitoring, thermal management as diagnostic topics
+
+---
+
+## ros2_socketcan
+- **Location:** jetson-ros2/can-bus/ros2_socketcan/
+- **Source:** https://github.com/autowarefoundation/ros2_socketcan
+- **Author:** Autoware Foundation
+- **License:** Apache-2.0
+- **Purpose:** ROS2 wrapper around Linux SocketCAN - bridges CAN bus to ROS2 topics
+
+---
+
+## ros2_canopen
+- **Location:** jetson-ros2/can-bus/ros2_canopen/
+- **Source:** https://github.com/ros-industrial/ros2_canopen
+- **Author:** ROS-Industrial Consortium
+- **License:** Apache-2.0
+- **Purpose:** CANopen driver framework for ROS2 - servo drives over CAN
