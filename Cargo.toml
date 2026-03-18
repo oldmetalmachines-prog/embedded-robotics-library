@@ -2,7 +2,8 @@
 resolver = "2"
 members = [
   "drivers/bme280",
-  "esp32/communication/wifi/udp-telemetry-sender",
+  \"esp32/communication/mqtt-telemetry-sender\",
+  \"esp32/communication/wifi/udp-telemetry-sender\",
   "esp32/utilities/i2c-scanner",
   "jetson-orin/examples/gpio-blink",
   "jetson-orin/examples/pwm-servo",
