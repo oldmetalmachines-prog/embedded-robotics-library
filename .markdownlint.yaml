@@ -1,0 +1,25 @@
+default: true
+
+MD013: false   # line length
+MD022: false   # headings spacing
+MD031: false   # fenced code blocks spacing
+MD032: false   # list spacing
+MD040: false   # fenced code language
+MD009: false   # trailing spaces
+
+MD012: false   # multiple consecutive blank lines
+MD026: false   # trailing punctuation in headings
+MD034: false   # bare URLs
+MD036: false   # emphasis used instead of a heading
+MD029: false   # ordered list numbering
+
+MD033: false   # inline HTML (e.g., <kbd>)
+MD004: false   # unordered list style (* vs -)
+MD024: false   # duplicate headings
+MD047: false   # file must end with single newline
+MD010: false   # hard tabs in imported/vendor docs
+MD041: false   # first line heading in imported/vendor docs
+MD007: false   # unordered list indentation in imported/vendor docs
+MD003: false   # heading style in imported/vendor docs
+MD025: false   # multiple top-level headings in imported/vendor docs
+MD001: false   # heading increment in imported/vendor docs

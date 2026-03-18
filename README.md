@@ -1,50 +1,51 @@
 # Rust Embedded Library
 
-Personal collection of Rust code for embedded systems, robotics, and IoT projects.
+Personal collection of embedded systems, robotics, automotive, and IoT code. The repo is Rust-first, but it also contains C, C++, Python, and ROS2 reference implementations that are useful when porting drivers and hardware integrations.
 
-## 🎯 Purpose
+## Purpose
 
-Centralized repository of tested, working Rust code for:
-- ESP32/ESP32-P4 embedded development
-- Raspberry Pi projects
-- ROS2 robotics integration
+Centralized repository of tested or in-progress code for:
+- ESP32 and ESP32-P4 embedded development
+- Raspberry Pi utilities, protocols, and GPIO projects
+- Jetson Orin examples and Jetson ROS2 integrations
 - Sensor drivers and motor control
-- Reusable algorithms and utilities
+- Automotive diagnostics and CAN/J1939 examples
+- Reusable protocols and utilities
 
-## 📁 Structure
+## Repository structure
 
-### ESP32
-```
-esp32/
-├── sensors/          # Sensor drivers (IMU, GPS, LiDAR, etc.)
-├── motors/           # Motor control (PWM, stepper, servo)
-├── communication/    # UART, I2C, SPI, WiFi, Bluetooth
-└── examples/         # Complete working examples
-```
+Top-level directories currently in use:
 
-### Raspberry Pi
-```
-raspberry-pi/
-├── gpio/             # GPIO control and interfacing
-├── peripherals/      # Hardware peripheral drivers
-└── ros2-integration/ # ROS2 node examples
-```
-
-### Common
-```
-common/
-├── math/             # Mathematical utilities
-├── filters/          # Signal processing (Kalman, complementary, etc.)
-├── algorithms/       # Pathfinding, SLAM, etc.
-└── pid-control/      # PID controllers
+```text
+common/             Shared protocol definitions and reusable assets
+drivers/            Rust drivers and hardware support crates
+esp32/              ESP32 communication, utilities, sensors, and examples
+farm-equipment/     ISOBUS and agricultural protocol references
+j1939-automotive/   J1939 examples in C, C++, and Python
+jetson-orin/        Native Jetson Orin Rust examples
+jetson-ros2/        Jetson ROS2 packages and integrations
+obd2-diagnostics/   OBD-II diagnostics code in multiple languages
+raspberry-pi/       Raspberry Pi GPIO, protocol, utility, and ROS2 projects
+servo-control/      Servo and EtherCAT reference code
 ```
 
-### Dependencies
+## Rust workspace
+
+The Rust workspace is defined in the repository root `Cargo.toml` and currently includes these crates:
+
+```text
+drivers/bme280
+esp32/communication/wifi/udp-telemetry-sender
+esp32/utilities/i2c-scanner
+jetson-orin/examples/gpio-blink
+jetson-orin/examples/rtsp-camera-streamer
+raspberry-pi/gpio/servo-controller
+raspberry-pi/pico-2w/examples/led-blink
+raspberry-pi/ros2-integration
+raspberry-pi/utilities/udp-telemetry-receiver
 ```
-dependencies/
-├── crate-configs/    # Common Cargo.toml configurations
-└── cargo-templates/  # Project templates
-```
+
+Projects outside the workspace are still valuable references, but they may be vendor drops, upstream examples, or language-specific experiments rather than first-class Rust crates.
 
 ## 🔧 Hardware Targets
 
