@@ -1,0 +1,6 @@
+# Markdownlint configuration
+# Disable rules that fire on third-party/legacy content in this repo
+MD010: false   # no-hard-tabs  (pre-existing in j1939-automotive, servo-control, etc.)
+MD013: false   # line-length
+MD033: false   # no-inline-html
+MD041: false   # first-line-heading (many subdirectory READMEs don't start with H1)

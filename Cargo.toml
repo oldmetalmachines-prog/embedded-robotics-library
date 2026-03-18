@@ -19,6 +19,8 @@ default-members = [
   "raspberry-pi/gpio/servo-controller",
   "raspberry-pi/utilities/udp-telemetry-receiver",
 ]
-
-
-
+exclude = [
+  "rppal",
+  "awesome-embedded-rust",
+  "awesome-esp-rust",
+]
