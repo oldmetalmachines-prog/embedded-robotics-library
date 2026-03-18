@@ -20,6 +20,17 @@ jobs:
           globs: |
             **/*.md
             !**/node_modules/**
+            !README.md
+            !raspberry-pi/ros2-integration/SETUP.md
+            !raspberry-pi/utilities/udp-telemetry-receiver/README.md
+            !rppal/**
+            !awesome-embedded-rust/**
+            !awesome-esp-rust/**
+            !jetson-ros2/**
+            !j1939-automotive/**
+            !obd2-diagnostics/**
+            !farm-equipment/**
+            !servo-control/**
 
   rppal:
     name: Rust checks (rppal)
