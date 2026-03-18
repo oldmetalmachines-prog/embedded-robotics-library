@@ -1,0 +1,18 @@
+[package]
+name = "bmp280-i2c"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "BMP280 temperature and pressure reader over Linux I2C"
+
+[features]
+default = []
+sigma-rack = ["dep:rumqttc", "dep:serde", "dep:serde_json"]
+
+[dependencies]
+anyhow = "1"
+embedded-hal = "1"
+linux-embedded-hal = "0.4"
+rumqttc = { version = "0.24", optional = true }
+serde = { version = "1", features = ["derive"], optional = true }
+serde_json = { version = "1", optional = true }

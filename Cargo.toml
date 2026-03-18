@@ -5,18 +5,22 @@ members = [
   "esp32/communication/wifi/udp-telemetry-sender",
   "esp32/utilities/i2c-scanner",
   "jetson-orin/examples/gpio-blink",
+  "jetson-orin/examples/pwm-servo",
   "jetson-orin/examples/rtsp-camera-streamer",
   "raspberry-pi/gpio/servo-controller",
   "raspberry-pi/pico-2w/examples/led-blink",
   "raspberry-pi/ros2-integration",
+  "raspberry-pi/sensors/bmp280-i2c",
   "raspberry-pi/utilities/udp-telemetry-receiver",
 ]
 
 default-members = [
   "drivers/bme280",
   "jetson-orin/examples/gpio-blink",
+  "jetson-orin/examples/pwm-servo",
   "jetson-orin/examples/rtsp-camera-streamer",
   "raspberry-pi/gpio/servo-controller",
+  "raspberry-pi/sensors/bmp280-i2c",
   "raspberry-pi/utilities/udp-telemetry-receiver",
 ]
 exclude = [
