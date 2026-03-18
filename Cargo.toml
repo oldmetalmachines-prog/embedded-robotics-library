@@ -1,6 +1,7 @@
 [workspace]
 resolver = "2"
 members = [
+  "drivers/bme280",
   "esp32/communication/wifi/udp-telemetry-sender",
   "esp32/utilities/i2c-scanner",
   "jetson-orin/examples/gpio-blink",
@@ -9,15 +10,14 @@ members = [
   "raspberry-pi/pico-2w/examples/led-blink",
   "raspberry-pi/ros2-integration",
   "raspberry-pi/utilities/udp-telemetry-receiver",
-  "rppal",
 ]
 
 default-members = [
+  "drivers/bme280",
   "jetson-orin/examples/gpio-blink",
   "jetson-orin/examples/rtsp-camera-streamer",
   "raspberry-pi/gpio/servo-controller",
   "raspberry-pi/utilities/udp-telemetry-receiver",
-  "rppal",
 ]
 
 
