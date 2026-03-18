@@ -2,283 +2,158 @@
 
 ## Purpose
 
-Receives telemetry data sent over WiFi from ESP32 devices using UDP. Parses and displays sensor data according to the Telemetry v1 schema.
+Receives UDP packets from ESP32 or other embedded senders and logs them to JSONL, CSV, or both.
 
-This is the companion to `esp32/communication/wifi/udp-telemetry-sender/`.
+This is the companion to `esp32/communication/wifi/udp-telemetry-sender/`, but it is intentionally generic: it does not decode a telemetry schema yet. It records packet metadata plus the payload as UTF-8 when possible, or as a hex string when the payload is binary.
 
 Use cases:
-- Monitor robot telemetry in real-time
-- Log sensor data for analysis
-- Foundation for ROS2 bridge
-- Debug wireless communication
+- Capture telemetry traffic during bring-up
+- Log raw packets for later parsing and replay
+- Verify network connectivity between sender and receiver
+- Produce JSONL and CSV artifacts for debugging
 
 ---
 
 ## Hardware Required
 
-**Essential:**
-- Raspberry Pi 5 (or Pi Zero 2W, or any Linux machine)
-- Network connection (WiFi or Ethernet)
-- Same network as ESP32 sender
+- Raspberry Pi 5, Raspberry Pi Zero 2W, or any Linux machine
+- Network connection shared with the sender
 
-**No external wiring required** - runs purely in software.
+No external wiring is required.
 
 ---
 
 ## Software Dependencies
+
+This crate currently uses only the Rust standard library.
+
 ```toml
 [dependencies]
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-chrono = "0.4"
-colored = "2.1"
 ```
 
-**Platform:** Any Linux system with Rust installed.
+Platform: any Linux system with Rust installed.
 
 ---
 
 ## Build and Run
+
 ```bash
 # Build release version
 cargo build --release
 
-# Run
-cargo run --release
+# Run with defaults
+cargo run --release -- --bind 0.0.0.0:9000 --mode both
 
-# Or run the binary directly
-./target/release/udp-telemetry-receiver
+# Write JSONL only
+cargo run --release -- --bind 0.0.0.0:9000 --mode jsonl --jsonl telemetry.jsonl
+
+# Write CSV only
+cargo run --release -- --bind 0.0.0.0:9000 --mode csv --csv telemetry.csv
+
+# One-packet smoke test
+cargo run -- --bind 127.0.0.1:9101 --mode both --jsonl /tmp/udp-test.jsonl --csv /tmp/udp-test.csv --max-packets 1
+```
+
+---
+
+## CLI Options
+
+```text
+--bind ADDR           UDP bind address (default: 0.0.0.0:9000)
+--jsonl PATH          JSONL output path (default: telemetry.jsonl)
+--csv PATH            CSV output path (default: telemetry.csv)
+--mode MODE           jsonl | csv | both (default: both)
+--buffer-size BYTES   receive buffer size in bytes (default: 2048)
+--max-packets COUNT   stop after COUNT packets for test runs
+-h, --help            show help
 ```
 
 ---
 
 ## Expected Output
 
-### When Receiving Data:
-```
-=== UDP Telemetry Receiver ===
-Listening on 0.0.0.0:8888 for telemetry packets
+### Startup
 
-✓ UDP socket bound successfully
-Waiting for telemetry data...
-
-[14:23:45.123] esp32-test-01 telemetry seq=0 from 192.168.1.150:54321
-  📊 Accel: (  0.02,   0.01,   9.81) m/s²
-  🔄 Gyro:  (  0.00,  -0.50,   0.10) deg/s
-  🌡️  Temp:  23.5°C
-
-[14:23:45.223] esp32-test-01 telemetry seq=1 from 192.168.1.150:54321
-  📊 Accel: (  0.02,   0.01,   9.81) m/s²
-  🔄 Gyro:  (  0.00,  -0.50,   0.10) deg/s
-  🌡️  Temp:  23.5°C
-
-📈 Received: 100, Errors: 0, Success: 100.0%
+```text
+udp-telemetry-receiver listening on 0.0.0.0:9000
+mode=Both, jsonl=telemetry.jsonl, csv=telemetry.csv, buffer_size=2048, max_packets=None
 ```
 
-### When Packet Loss Detected:
-```
-[14:23:45.523] esp32-test-01 telemetry seq=5 from 192.168.1.150:54321
-⚠️  Lost 2 packets
-  📊 Accel: (  0.02,   0.01,   9.81) m/s²
+### Test run with `--max-packets 1`
+
+```text
+udp-telemetry-receiver listening on 127.0.0.1:9101
+mode=Both, jsonl=/tmp/udp-test.jsonl, csv=/tmp/udp-test.csv, buffer_size=2048, max_packets=Some(1)
+received 1 packets, exiting due to --max-packets
 ```
 
-### On Parse Error:
+### Example JSONL output
+
+```json
+{"ts_ms":1773806097651,"src":"127.0.0.1:50323","len":17,"payload_utf8":"{\"hello\":\"robot\"}"}
 ```
-❌ JSON parse error: expected value at line 1 column 1 (size: 45 bytes)
-   Raw: {incomplete json data...
+
+### Example CSV output
+
+```csv
+ts_ms,src_ip,src_port,len,payload_utf8
+1773806097651,127.0.0.1,50323,17,"{""hello"":""robot""}"
 ```
 
 ---
 
 ## Troubleshooting
 
-### "No packets received"
+### No packets received
 
-**Check ESP32 sender:**
+Check:
+
 ```bash
-# Verify ESP32 is sending
-# Check serial monitor on ESP32 for "Sent seq X"
+# Confirm the listener is bound to the expected port
+ss -lun | grep 9000
+
+# Send a quick local packet for validation
+python3 -c "import socket; s=socket.socket(socket.AF_INET, socket.SOCK_DGRAM); s.sendto(b'{\"hello\":\"robot\"}', ('127.0.0.1', 9000))"
 ```
 
-**Check network:**
+If the sender is an ESP32, verify its target IP and port match the receiver.
+
+### Address already in use
+
 ```bash
-# Verify both devices on same network
-ping [ESP32_IP]
-
-# Check firewall
-sudo ufw status
-sudo ufw allow 8888/udp
-
-# Test with netcat
-nc -ul 8888
+sudo lsof -i :9000
 ```
 
-**Check IP in ESP32 code:**
-```rust
-// In udp-telemetry-sender/src/main.rs
-// Make sure TARGET_IP matches this Pi's IP
-hostname -I  # Get your Pi's IP
-```
+Then either stop the other process or choose a different `--bind` port.
 
----
+### Binary payloads show up as hex
 
-### "Address already in use"
-
-**Another program using port 8888:**
-```bash
-# Find what's using the port
-sudo lsof -i :8888
-
-# Kill it if needed
-sudo kill [PID]
-
-# Or use different port
-# Edit both sender and receiver code
-```
-
----
-
-### "Permission denied"
-
-**Ports <1024 need sudo (but 8888 doesn't):**
-```bash
-# If you changed to port 80:
-sudo ./target/release/udp-telemetry-receiver
-```
-
----
-
-### "Parse errors on valid JSON"
-
-**Check sender message size:**
-```bash
-# On ESP32, verify messages are <512 bytes
-# Large messages may get fragmented
-```
-
----
-
-## Message Format
-
-Expects JSON following `common/protocols/telemetry_v1.json`:
-```json
-{
-  "header": {
-    "device_id": "esp32-test-01",
-    "timestamp": 1707782400000,
-    "sequence": 0,
-    "message_type": "telemetry"
-  },
-  "telemetry": {
-    "imu": {
-      "accel_x": 0.02,
-      "accel_y": 0.01,
-      "accel_z": 9.81,
-      "gyro_x": 0.0,
-      "gyro_y": -0.5,
-      "gyro_z": 0.1,
-      "temperature_c": 23.5
-    }
-  }
-}
-```
+That is expected behavior. Non-UTF-8 payloads are logged as a `0x...` string so bytes are preserved in a human-readable form.
 
 ---
 
 ## Features
 
-✅ **Packet loss detection** - Tracks sequence numbers  
-✅ **Colored output** - Easy to read in terminal  
-✅ **Statistics** - Success rate, error count  
-✅ **Timestamp display** - Local time for each message  
-✅ **Error handling** - Shows malformed packets for debugging  
+- Configurable bind address, output paths, and buffer size
+- Validated `jsonl | csv | both` output modes
+- Persistent JSONL/CSV writers instead of reopening files per packet
+- `--max-packets` for smoke tests and automation
+- UTF-8 payload logging with binary fallback to hex
+- Unit-tested argument parsing and escaping helpers
 
 ---
 
 ## Next Steps
 
-After confirming data reception:
-
-1. **Add logging to file:**
-```rust
-   // Add to Cargo.toml: csv = "1.3"
-   // Write telemetry to CSV for analysis
-```
-
-2. **ROS2 bridge:**
-   - See `raspberry-pi/ros2-integration/examples/`
-   - Convert UDP → ROS2 topics
-
-3. **Multiple devices:**
-   - Track device_id
-   - Aggregate data from multiple ESP32s
-
-4. **Data visualization:**
-   - Plot IMU data with matplotlib
-   - Real-time graphs
-
----
-
-## Code Explanation
-
-### UDP Socket Binding
-```rust
-// Bind to all interfaces on port 8888
-let socket = UdpSocket::bind("0.0.0.0:8888")?;
-
-// Receive packet (blocking)
-let (size, src) = socket.recv_from(&mut buffer)?;
-```
-
-### JSON Parsing
-```rust
-// Deserialize using serde
-let msg: TelemetryMessage = serde_json::from_slice(&buffer[..size])?;
-```
-
-### Packet Loss Detection
-```rust
-// Check if sequence jumped
-if msg.sequence != expected_seq {
-    let lost = msg.sequence - expected_seq;
-    println!("Lost {} packets", lost);
-}
-```
-
----
-
-## Performance
-
-- **CPU Usage:** <1% on Pi 5
-- **Memory:** ~2MB
-- **Latency:** <5ms processing time
-- **Max Rate:** >1000 packets/second
-
----
-
-## Testing Without ESP32
-
-**Send test packet from command line:**
-```bash
-echo '{"header":{"device_id":"test","timestamp":1707782400000,"sequence":0,"message_type":"telemetry"},"telemetry":{"imu":{"accel_x":0.0,"accel_y":0.0,"accel_z":9.81,"gyro_x":0.0,"gyro_y":0.0,"gyro_z":0.0,"temperature_c":23.5}}}' | nc -u localhost 8888
-```
-
-**Should see output in receiver.**
+Possible future improvements:
+- Add optional telemetry-schema decoding for known packet formats
+- Add rolling output files or size-based rotation
+- Add packet counters and basic runtime stats
+- Add replay tooling for captured JSONL/CSV logs
 
 ---
 
 ## Reference Documents
 
-- Telemetry schema: `common/protocols/telemetry_v1.json`
-- Companion sender: `esp32/communication/wifi/udp-telemetry-sender/`
-- ROS2 integration: `raspberry-pi/ros2-integration/SETUP.md`
-
----
-
-## Changelog
-
-- 2026-02-13: Initial version
-- Parses telemetry_v1 schema
-- Colored terminal output
-- Packet loss detection
-- Statistics tracking
+- Companion sender: `esp32/communication/wifi/udp-telemetry-sender/README.md`
+- Protocol references: `common/protocols/`
