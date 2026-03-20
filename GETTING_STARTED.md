@@ -61,6 +61,7 @@ A curated collection of Rust embedded code for ESP32, Raspberry Pi, and robotics
 ## 🚀 Quick Start
 
 ### 1. Clone and Explore
+
 ```bash
 git clone git@github.com:oldmetalmachines-prog/rust-embedded-library.git
 cd rust-embedded-library
@@ -71,6 +72,7 @@ ls raspberry-pi/gpio/rppal-examples/
 ```
 
 ### 2. Start a New ESP32 Project
+
 ```bash
 # Copy a template
 cp dependencies/cargo-templates/esp32-robotics-nostd.toml my-robot/Cargo.toml
@@ -81,6 +83,7 @@ cargo generate esp-rs/esp-template
 ```
 
 ### 3. Start a New Raspberry Pi Project
+
 ```bash
 # Create new project
 cargo new rpi-robot
@@ -94,6 +97,7 @@ cp ../raspberry-pi/gpio/rppal-examples/gpio_blinkled.rs src/main.rs
 ```
 
 ### 4. Test a Sensor Example
+
 ```bash
 # ESP32 IMU example
 cd esp32/sensors/examples/
@@ -192,6 +196,7 @@ cat mpu6050-basic.rs  # Review wiring and code
 ## 🤝 Contributing to Your Library
 
 As you build projects, add them back:
+
 ```bash
 cd ~/rust-embedded-library
 
@@ -220,6 +225,7 @@ git push
 ### Installed Tools Needed
 
 **For ESP32:**
+
 ```bash
 # Install Rust ESP toolchain
 cargo install espup
@@ -231,6 +237,7 @@ cargo install cargo-espflash
 ```
 
 **For Raspberry Pi:**
+
 ```bash
 # Standard Rust (already have)
 rustup target add aarch64-unknown-linux-gnu
@@ -240,6 +247,7 @@ cargo install cross
 ```
 
 **For ROS2:**
+
 ```bash
 # See: raspberry-pi/ros2-integration/SETUP.md
 sudo apt install ros-jazzy-desktop
@@ -267,12 +275,14 @@ sudo apt install ros-jazzy-desktop
 - `ls /dev/ttyUSB*` or `/dev/ttyACM*`
 
 ### Raspberry Pi GPIO Permission Denied
+
 ```bash
 sudo usermod -a -G gpio $USER
 # Logout and login
 ```
 
 ### ROS2 Can't Find r2r
+
 ```bash
 # Source ROS2 environment
 source /opt/ros/jazzy/setup.bash
