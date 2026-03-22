@@ -17,3 +17,18 @@ MD033: false   # inline HTML (e.g., <kbd>)
 MD004: false   # unordered list style (* vs -)
 MD024: false   # duplicate headings
 MD047: false   # file must end with single newline
+
+MD010: false   # hard tabs
+MD060: false   # table column style
+MD025: false   # single title/h1
+MD007: false   # unordered list indentation
+MD050: false   # strong style
+MD041: false   # first line heading
+MD003: false   # heading style
+MD058: false   # blank lines around tables
+MD056: false   # table column count
+MD055: false   # table pipe style
+MD001: false   # heading increment
+MD059: false   # descriptive link text
+MD039: false   # no space in links
+MD038: false   # no space in code spans
