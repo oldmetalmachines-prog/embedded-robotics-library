@@ -1,0 +1,30 @@
+version: 2
+updates:
+  - package-ecosystem: cargo
+    directory: /
+    schedule:
+      interval: daily
+    commit-message:
+      prefix: ''
+    ignore:
+      # These dependencies need to be updated at the same time with urdf-viz.
+      - dependency-name: urdf-rs
+      - dependency-name: k
+      - dependency-name: nalgebra
+      - dependency-name: ncollide3d
+    labels: []
+    groups:
+      cargo:
+        patterns:
+          - '*'
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: daily
+    commit-message:
+      prefix: ''
+    labels: []
+    groups:
+      github-actions:
+        patterns:
+          - '*'

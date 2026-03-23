@@ -1,0 +1,47 @@
+name: Rust
+
+on:
+  push:
+    branches: [ "main", "1.3.0" ]
+  pull_request:
+    branches: [ "main", "1.3.0" ]
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install Wayland dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libwayland-dev
+    - name: Build
+      run: cargo build --verbose
+    - name: Run tests
+      run: cargo test --verbose
+    - name: Run URDF extractor
+      run: cargo run src/tests/data/fanuc/lrmate200ib_macro.xacro
+    - name: Build without features
+      run: cargo build --no-default-features --verbose
+    - name: Run tests without features
+      run: cargo test --no-default-features --verbose
+    - name: Run URDF extractor once more
+      run: cargo run
+    - name: Build all examples
+      run: cargo build --examples
+    - name: Build all examples no default features
+      run: cargo build --examples --no-default-features
+
+
+
+
+
+

@@ -1,0 +1,82 @@
+[package]
+name = "openrr-apps"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "applications using openrr"
+keywords = ["robotics", "robot"]
+categories = ["science::robotics"]
+
+[features]
+default = ["gui", "ros"]
+assimp = [
+    "openrr-client/assimp",
+    "openrr-command/assimp",
+    "openrr-teleop/assimp",
+]
+ros = ["arci-ros"]
+gui = ["openrr-gui"]
+
+[dependencies]
+anyhow.workspace = true
+arci-gamepad-gilrs.workspace = true
+arci-speak-audio.workspace = true
+arci-speak-cmd.workspace = true
+arci-urdf-viz.workspace = true
+arci.workspace = true
+clap_complete.workspace = true
+clap.workspace = true
+k.workspace = true
+openrr-client.workspace = true
+openrr-command.workspace = true
+openrr-config.workspace = true
+openrr-plugin.workspace = true
+openrr-teleop.workspace = true
+openrr-tracing.workspace = true
+rand.workspace = true
+schemars.workspace = true
+serde_json.workspace = true
+serde.workspace = true
+thiserror.workspace = true
+tokio = { workspace = true, features = ["rt-multi-thread", "macros"] }
+toml.workspace = true
+tracing-appender.workspace = true
+tracing-subscriber = { workspace = true, features = ["json"] }
+tracing.workspace = true
+urdf-rs.workspace = true
+
+arci-ros = { workspace = true, optional = true }
+openrr-gui = { workspace = true, optional = true }
+
+[target.'cfg(unix)'.dependencies]
+arci-gamepad-keyboard.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true
+tokio = { workspace = true, features = ["full"] }
+
+[[bin]]
+name = "openrr_apps_robot_command"
+path = "src/bin/robot_command.rs"
+
+[[bin]]
+name = "openrr_apps_robot_teleop"
+path = "src/bin/robot_teleop.rs"
+
+[[bin]]
+name = "openrr_apps_joint_position_sender"
+path = "src/bin/joint_position_sender.rs"
+required-features = ["gui"]
+
+[[bin]]
+name = "openrr_apps_velocity_sender"
+path = "src/bin/velocity_sender.rs"
+required-features = ["gui"]
+
+[[bin]]
+name = "openrr_apps_config"
+path = "src/bin/config.rs"
+
+[lints]
+workspace = true

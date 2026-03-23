@@ -1,0 +1,171 @@
+[workspace]
+resolver = "2"
+members = [
+    "arci",
+    "arci-gamepad-gilrs",
+    "arci-gamepad-keyboard",
+    "arci-ros",
+    "arci-ros2",
+    "arci-speak-cmd",
+    "arci-speak-audio",
+    "arci-urdf-viz",
+    "openrr",
+    "openrr-apps",
+    "openrr-base",
+    "openrr-client",
+    "openrr-command",
+    "openrr-config",
+    "openrr-gui",
+    "openrr-planner",
+    "openrr-plugin",
+    "openrr-remote",
+    "openrr-teleop",
+    "openrr-tracing",
+
+    # internal
+    "arci-ros/tests/hygiene",
+    "openrr-plugin/examples/plugin",
+    "tools/codegen",
+]
+
+[workspace.package]
+# When publishing a new version:
+# - Create "v0.x.y" git tag
+# - Push the above tag (run `git push origin --tags`)
+# Then, CI will publish to crates.io and create a GitHub release.
+# Troubleshooting: If you encounter problems while publishing to crates.io and
+# do not complete publishing all crates, you can temporarily edit and run
+# ci/publish.sh locally to publish the remaining crates.
+# NOTE: when updating this, reminder to update arci-speak-cmd's Cargo.toml.
+version = "0.1.0"
+edition = "2024"
+license = "Apache-2.0"
+repository = "https://github.com/openrr/openrr"
+homepage = "https://openrr.github.io"
+
+[workspace.dependencies]
+arci = "0.1.0"
+arci-gamepad-gilrs = "0.1.0"
+arci-gamepad-keyboard = "0.1.0"
+arci-ros = "0.1.0"
+arci-speak-audio = "0.1.0"
+arci-speak-cmd = "0.1.0"
+arci-urdf-viz = "0.1.0"
+openrr-apps = { version = "0.1.0", default-features = false }
+openrr-base = { version = "0.1.0", default-features = false }
+openrr-client = { version = "0.1.0", default-features = false }
+openrr-command = { version = "0.1.0", default-features = false }
+openrr-config = { version = "0.1.0", default-features = false }
+openrr-gui = { version = "0.1.0", default-features = false }
+openrr-planner = { version = "0.1.0", default-features = false }
+openrr-plugin = { version = "0.1.0", default-features = false }
+openrr-teleop = { version = "0.1.0", default-features = false }
+openrr-tracing = { version = "0.1.0", default-features = false }
+
+abi_stable = "0.11"
+anyhow = "1"
+assert_approx_eq = "1.1"
+assimp = "0.3"
+async-ffi = { version = "0.5", features = ["abi_stable"] }
+async-recursion = "1"
+async-trait = "0.1"
+auto_impl = "1"
+chrono = "0.4.24"
+clap = { version = "4", features = ["derive"] }
+clap_complete = "4"
+criterion = "0.5"
+easy-ext = "1"
+eframe = "0.30"
+egui_extras = "0.30"
+flaky_test = "0.2"
+flume = "0.11"
+fs-err = "3"
+futures = "0.3"
+gilrs = { version = "0.11", features = ["serde-serialize"] }
+heck = "0.5"
+image = { version = "0.25", default-features = false }
+indexmap = "2"
+influxdb = "0.7"
+k = "0.32"
+mesh-loader = "0.1.4"
+nalgebra = "0.30"
+ncollide3d = "0.33"
+nix = { version = "0.29", features = ["signal"] }
+num-traits = "0.2"
+paste = "1"
+portpicker = "0.1"
+prettyplease = "=0.2.27"
+proc-macro2 = "1"
+prost = "0.13"
+prost-types = "0.13"
+quote = "1"
+r2r = "0.9"
+rand = "0.8"
+rayon = "1.5"
+rodio = "0.20"
+ros-nalgebra = "0.1"
+rosrust = "0.9"
+rrt = "0.7"
+rustyline = "15"
+schemars = "0.8"
+scoped-sleep = "0.1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_with = "3"
+syn = "2"
+tempfile = "3"
+termios = "0.3"
+tf_r2r = "0.2"
+tf_rosrust = "0.1"
+thiserror = "2"
+tokio = "1"
+tokio-test = "0.4"
+toml = "0.5"
+toml-query = "0.10"
+tonic = "0.12"
+tonic-build = "0.12"
+tracing = { version = "0.1", features = ["log"] }
+tracing-appender = "0.2"
+tracing-subscriber = { version = "0.3", default-features = false, features = ["ansi", "env-filter"] }
+trajectory = "0.1"
+urdf-rs = "0.9"
+urdf-viz = "0.46"
+ureq = { version = "2", features = ["json"] }
+url = "2"
+
+[workspace.lints.rust]
+missing_debug_implementations = "warn"
+# missing_docs = "warn" # TODO
+rust_2018_idioms = "warn"
+single_use_lifetimes = "warn"
+unreachable_pub = "warn"
+[workspace.lints.clippy]
+# buggy: https://github.com/rust-lang/rust-clippy/issues?q=is%3Aissue+derive_partial_eq_without_eq
+derive_partial_eq_without_eq = { level = "allow", priority = 1 }
+lint_groups_priority = { level = "allow", priority = 1 } # https://github.com/rust-lang/rust-clippy/issues/12920
+
+[patch.crates-io]
+arci = { path = "arci" }
+arci-gamepad-gilrs = { path = "arci-gamepad-gilrs" }
+arci-gamepad-keyboard = { path = "arci-gamepad-keyboard" }
+arci-ros = { path = "arci-ros" }
+arci-ros2 = { path = "arci-ros2" }
+arci-speak-audio = { path = "arci-speak-audio" }
+arci-speak-cmd = { path = "arci-speak-cmd" }
+arci-urdf-viz = { path = "arci-urdf-viz" }
+openrr = { path = "openrr" }
+openrr-apps = { path = "openrr-apps" }
+openrr-base = { path = "openrr-base" }
+openrr-client = { path = "openrr-client" }
+openrr-command = { path = "openrr-command" }
+openrr-config = { path = "openrr-config" }
+openrr-gui = { path = "openrr-gui" }
+openrr-planner = { path = "openrr-planner" }
+openrr-plugin = { path = "openrr-plugin" }
+openrr-remote = { path = "openrr-remote" }
+openrr-teleop = { path = "openrr-teleop" }
+openrr-tracing = { path = "openrr-tracing" }
+
+[profile.release]
+lto = true
+codegen-units = 1

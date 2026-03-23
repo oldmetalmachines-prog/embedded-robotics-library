@@ -1,0 +1,9 @@
+# https://rust-lang.github.io/rust-clippy/master/#disallowed_methods
+disallowed-methods = [
+    # use faster `flume` instead
+    { path = "std::sync::mpsc::channel", reason = "use faster `flume::unbounded` instead" },
+    { path = "std::sync::mpsc::sync_channel", reason = "use faster `flume::bounded` instead" },
+]
+# https://rust-lang.github.io/rust-clippy/master/#disallowed_types
+disallowed-types = [
+]

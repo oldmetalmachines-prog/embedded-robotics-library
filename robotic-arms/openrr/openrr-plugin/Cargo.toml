@@ -1,0 +1,29 @@
+[package]
+name = "openrr-plugin"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Plugin support for arci"
+keywords = ["robotics", "robot"]
+categories = ["science::robotics"]
+
+[dependencies]
+abi_stable.workspace = true
+anyhow.workspace = true
+arci.workspace = true
+async-ffi.workspace = true
+tokio = { workspace = true, features = ["sync", "rt-multi-thread"] }
+
+[dev-dependencies]
+assert_approx_eq.workspace = true
+criterion.workspace = true
+fs-err.workspace = true
+tokio = { workspace = true, features = ["full"] }
+
+[[bench]]
+name = "proxy"
+harness = false
+
+[lints]
+workspace = true

@@ -1,0 +1,27 @@
+[package]
+name = "arci-gamepad-gilrs"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "arci::Gamepad implementation using gilrs"
+keywords = ["robotics", "robot"]
+categories = ["science::robotics"]
+
+[dependencies]
+arci.workspace = true
+flume.workspace = true
+gilrs.workspace = true
+indexmap = { workspace = true, features = ["serde"] }
+schemars.workspace = true
+serde_with = { workspace = true, features = ["indexmap_2"] }
+serde.workspace = true
+tracing.workspace = true
+
+[dev-dependencies]
+assert_approx_eq.workspace = true
+tokio = { workspace = true, features = ["full"] }
+tracing-subscriber.workspace = true
+
+[lints]
+workspace = true

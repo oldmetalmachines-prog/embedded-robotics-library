@@ -1,0 +1,24 @@
+[package]
+name = "arci-speak-audio"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "arci::Speaker implementation for playing audio files"
+keywords = ["robotics", "robot"]
+categories = ["science::robotics"]
+
+[dependencies]
+arci.workspace = true
+rodio.workspace = true
+thiserror.workspace = true
+tokio = { workspace = true, features = ["sync"] }
+tracing.workspace = true
+
+[dev-dependencies]
+clap.workspace = true
+tokio = { workspace = true, features = ["full"] }
+tracing-subscriber.workspace = true
+
+[lints]
+workspace = true

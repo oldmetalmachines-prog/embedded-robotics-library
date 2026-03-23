@@ -1,0 +1,36 @@
+openrr_apps_robot_command list
+
+openrr_apps_robot_command send_joints_pose l_arm_collision_checked zero
+
+openrr_apps_robot_command send_joints l_arm -j 0=1.2 -j 1=1.2 -j 2=0.0 -j 3=-1.8 -j 4=-0.5 -j 5=0.0
+openrr_apps_robot_command send_joints l_arm -j 0=0.0 -j 1=0.0 -j 2=0.0 -j 3=0.0 -j 4=0.0 -j 5=0.0
+
+# self-collision avoidance demo
+openrr_apps_robot_command send_joints r_arm -j 0=0.5 -j 1=0.0 -j 2=0.0 -j 3=0.0 -j 4=0.0 -j 5=0.0
+openrr_apps_robot_command send_joints l_arm_collision_avoidance -j 0=-0.7 -j 1=0.3 -j 2=0.0 -j 3=0.0 -j 4=0.0 -j 5=0.0
+openrr_apps_robot_command send_joints l_arm_collision_avoidance -j 0=-0.7 -j 1=-0.3 -j 2=0.0 -j 3=0.0 -j 4=0.0 -j 5=0.0 -d 5.0
+openrr_apps_robot_command send_joints_pose l_arm_collision_checked zero
+openrr_apps_robot_command send_joints_pose r_arm_collision_checked zero
+
+openrr_apps_robot_command send_joints l_arm_ik -j 0=1.2 -j 1=1.2 -j 2=0.0 -j 3=-1.8 -j 4=-0.5 -j 5=0.0
+openrr_apps_robot_command send_joints l_arm_ik -j 0=0.0 -j 1=0.0 -j 2=0.0 -j 3=0.0 -j 4=0.0 -j 5=0.0
+
+openrr_apps_robot_command get_state l_arm
+openrr_apps_robot_command get_state l_arm_collision_checked
+openrr_apps_robot_command get_state l_arm_ik
+
+openrr_apps_robot_command send_joints l_arm_ik -j 0=1.2 -j 1=1.2 -j 2=0.0 -j 3=-1.8 -j 4=-0.5 -j 5=0.0
+openrr_apps_robot_command get_state l_arm_ik
+openrr_apps_robot_command move_ik l_arm_ik --x=0.7 --y=0.6 --z=0.2 --roll=0.0 --pitch=0.0 --yaw=0.0
+openrr_apps_robot_command get_state l_arm_ik
+openrr_apps_robot_command move_ik l_arm_ik -i --x=0.7 --y=0.6 --z=0.8 --roll=0.0 --pitch=0.0 --yaw=0.0
+openrr_apps_robot_command get_state l_arm_ik
+
+openrr_apps_robot_command get_navigation_current_pose
+openrr_apps_robot_command send_base_velocity 1.0 2.0 1.57 -d 3.0
+openrr_apps_robot_command send_base_velocity 0.0 0.0 0.0 -d 3.0
+openrr_apps_robot_command send_navigation_goal 0.0 0.0 0.0
+
+openrr_apps_robot_command speak Default "This is sample robot"
+
+openrr_apps_robot_command execute_command -- date

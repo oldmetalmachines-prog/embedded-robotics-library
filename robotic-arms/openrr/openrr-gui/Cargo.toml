@@ -1,0 +1,32 @@
+[package]
+name = "openrr-gui"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "openrr GUI library"
+keywords = ["robotics", "robot"]
+categories = ["science::robotics", "gui"]
+
+[features]
+default = []
+assimp = ["openrr-client/assimp"]
+
+[dependencies]
+arci.workspace = true
+eframe.workspace = true
+egui_extras = { workspace = true, features = ["image"] }
+image = { workspace = true, features = ["png"] }
+openrr-client.workspace = true
+rand.workspace = true
+thiserror.workspace = true
+tracing.workspace = true
+urdf-rs.workspace = true
+
+[dev-dependencies]
+anyhow.workspace = true
+assert_approx_eq.workspace = true
+tracing-subscriber.workspace = true
+
+[lints]
+workspace = true

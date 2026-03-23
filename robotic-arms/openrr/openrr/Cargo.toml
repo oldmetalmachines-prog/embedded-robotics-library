@@ -1,0 +1,33 @@
+[package]
+name = "openrr"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+description = "Open Rust Robotics framework"
+keywords = ["robotics", "robot"]
+categories = ["science::robotics"]
+
+[features]
+default = []
+assimp = [
+    "openrr-client/assimp",
+    "openrr-command/assimp",
+    "openrr-planner/assimp",
+    "openrr-teleop/assimp",
+    "openrr-apps/assimp",
+]
+gui = ["openrr-apps/gui"]
+ros = ["openrr-apps/ros"]
+
+[dependencies]
+openrr-apps.workspace = true
+openrr-client.workspace = true
+openrr-command.workspace = true
+openrr-config.workspace = true
+openrr-planner.workspace = true
+openrr-teleop.workspace = true
+
+[lints]
+workspace = true

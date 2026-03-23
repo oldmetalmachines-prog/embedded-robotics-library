@@ -95,3 +95,57 @@ If you remove a vendored directory in favor of a submodule or external link, upd
 - **Author:** ROS-Industrial Consortium
 - **License:** Apache-2.0
 - **Purpose:** CANopen driver framework for ROS2 - servo drives over CAN
+
+---
+
+## rs-opw-kinematics
+- **Location:** robotic-arms/rs-opw-kinematics/
+- **Source:** https://github.com/bourumir-wyngs/rs-opw-kinematics
+- **Author:** Bourumir Wyngs
+- **License:** BSD-3-Clause
+- **Purpose:** Analytical inverse/forward kinematics for 6-axis OPW industrial robots (Rust)
+
+---
+
+## DynamixelSDK
+- **Location:** robotic-arms/DynamixelSDK/
+- **Source:** https://github.com/ROBOTIS-GIT/DynamixelSDK
+- **Author:** ROBOTIS Co., Ltd.
+- **License:** Apache-2.0
+- **Purpose:** Official SDK for Dynamixel servo motors (C, C++, Python, and more)
+
+---
+
+## pymycobot
+- **Location:** robotic-arms/pymycobot/
+- **Source:** https://github.com/elephantrobotics/pymycobot
+- **Author:** Elephant Robotics
+- **License:** MIT
+- **Purpose:** Python serial API for MyCobot and MechArm robotic arms
+
+---
+
+## openrr
+- **Location:** robotic-arms/openrr/
+- **Source:** https://github.com/openrr/openrr
+- **Author:** OpenRR Contributors
+- **License:** Apache-2.0
+- **Purpose:** Open Robot Rust framework — kinematics, path planning, collision avoidance
+
+---
+
+## interbotix_ros_manipulators
+- **Location:** robotic-arms/interbotix_ros_manipulators/
+- **Source:** https://github.com/Interbotix/interbotix_ros_manipulators
+- **Author:** Interbotix
+- **License:** BSD-2-Clause
+- **Purpose:** ROS2 packages for Interbotix robot arms (WidowX, ReactorX series)
+
+---
+
+## moveo_ros
+- **Location:** robotic-arms/moveo_ros/
+- **Source:** https://github.com/4ndreas/BionicArm
+- **Author:** Andreas Bihlmaier
+- **License:** MIT
+- **Purpose:** ROS1 packages for the Moveo open-source 3D-printed robotic arm

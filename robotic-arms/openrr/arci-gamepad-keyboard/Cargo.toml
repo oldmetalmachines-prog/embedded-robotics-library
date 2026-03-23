@@ -1,0 +1,25 @@
+[package]
+name = "arci-gamepad-keyboard"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "arci::Gamepad implementation for keyboard"
+keywords = ["robotics", "robot"]
+categories = ["science::robotics"]
+
+[dependencies]
+arci.workspace = true
+flume.workspace = true
+tracing.workspace = true
+
+[target.'cfg(unix)'.dependencies]
+termios.workspace = true
+
+[dev-dependencies]
+assert_approx_eq.workspace = true
+tokio = { workspace = true, features = ["full"] }
+tracing-subscriber.workspace = true
+
+[lints]
+workspace = true

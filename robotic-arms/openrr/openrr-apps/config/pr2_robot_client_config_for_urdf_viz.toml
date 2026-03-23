@@ -1,0 +1,88 @@
+[[urdf_viz_clients_configs]]
+name = "l_arm"
+joint_names = [
+    "l_shoulder_pan_joint",
+    "l_shoulder_lift_joint",
+    "l_upper_arm_roll_joint",
+    "l_elbow_flex_joint",
+    "l_forearm_roll_joint",
+    "l_wrist_flex_joint",
+    "l_wrist_roll_joint",
+]
+
+[[urdf_viz_clients_configs]]
+name = "r_arm"
+joint_names = [
+    "r_shoulder_pan_joint",
+    "r_shoulder_lift_joint",
+    "r_upper_arm_roll_joint",
+    "r_elbow_flex_joint",
+    "r_forearm_roll_joint",
+    "r_wrist_flex_joint",
+    "r_wrist_roll_joint",
+]
+
+[[urdf_viz_clients_configs]]
+name = "torso"
+joint_names = ["torso_lift_joint"]
+
+[openrr_clients_config]
+urdf_path = "$(rospack find pr2_description)/robots/pr2.urdf.xacro"
+self_collision_check_pairs = [
+    "l_shoulder_pan_joint:r_shoulder_pan_joint",
+    "l_shoulder_lift_joint:r_shoulder_lift_joint",
+    "l_upper_arm_roll_joint:r_upper_arm_roll_joint",
+    "l_elbow_flex_joint:r_elbow_flex_joint",
+    "l_forearm_roll_joint:r_forearm_roll_joint",
+    "l_wrist_flex_joint:r_wrist_flex_joint",
+    "l_wrist_roll_joint:r_wrist_roll_joint",
+]
+
+[[openrr_clients_config.joint_trajectory_clients_container_configs]]
+name = "l_arm_with_torso"
+clients_names = ["torso", "l_arm"]
+
+[[openrr_clients_config.joint_trajectory_clients_container_configs]]
+name = "r_arm_with_torso"
+clients_names = ["torso", "r_arm"]
+
+[[openrr_clients_config.collision_check_clients_configs]]
+client_name = "l_arm_with_torso"
+name = "l_arm_with_torso_collision_checked"
+
+[[openrr_clients_config.collision_check_clients_configs]]
+client_name = "r_arm_with_torso"
+name = "r_arm_with_torso_collision_checked"
+
+[[openrr_clients_config.ik_clients_configs]]
+name = "l_arm_with_torso_ik"
+client_name = "l_arm_with_torso_collision_checked"
+solver_name = "l_arm_with_torso_ik_solver"
+
+[[openrr_clients_config.ik_clients_configs]]
+name = "r_arm_with_torso_ik"
+client_name = "r_arm_with_torso_collision_checked"
+solver_name = "r_arm_with_torso_ik_solver"
+
+[openrr_clients_config.ik_solvers_configs.l_arm_with_torso_ik_solver]
+ik_target = "l_gripper_palm_joint"
+allowable_position_error_m = 0.01
+
+[openrr_clients_config.ik_solvers_configs.r_arm_with_torso_ik_solver]
+ik_target = "r_gripper_palm_joint"
+allowable_position_error_m = 0.01
+
+[[openrr_clients_config.joints_poses]]
+pose_name = "ready"
+client_name = "l_arm"
+positions = [0.0, 0.0, 0.0, -0.7, 0.0, -0.2, 0.0]
+
+[[openrr_clients_config.joints_poses]]
+pose_name = "ready"
+client_name = "r_arm"
+positions = [0.0, 0.0, 0.0, -0.7, 0.0, -0.2, 0.0]
+
+[[openrr_clients_config.joints_poses]]
+pose_name = "ready"
+client_name = "torso"
+positions = [0.05]

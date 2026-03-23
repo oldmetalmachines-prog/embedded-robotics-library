@@ -1,0 +1,10 @@
+[package]
+name = "k_kinematics_test"
+version = "0.1.0"
+edition = "2021"
+
+# Tests the openrr `k` kinematics core without ROS, assimp, or GUI dependencies.
+# The arci-ros/arci-ros2 workspace members require a full ROS1/2 environment.
+[dependencies]
+k = { version = "0.32", default-features = false }
+nalgebra = "0.30"

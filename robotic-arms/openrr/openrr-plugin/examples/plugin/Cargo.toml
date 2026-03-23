@@ -1,0 +1,18 @@
+[package]
+name = "openrr-plugin-example"
+edition.workspace = true
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+abi_stable.workspace = true
+arci-gamepad-keyboard.workspace = true
+arci.workspace = true
+openrr-client.workspace = true
+openrr-plugin.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+
+[lints]
+workspace = true

@@ -1,0 +1,34 @@
+[package]
+name = "openrr-teleop"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "openrr teleoperation library"
+keywords = ["robotics", "robot"]
+categories = ["algorithms", "science::robotics"]
+
+[features]
+default = []
+assimp = ["openrr-client/assimp"]
+
+[dependencies]
+arci.workspace = true
+async-trait.workspace = true
+auto_impl.workspace = true
+clap.workspace = true
+k.workspace = true
+openrr-client.workspace = true
+openrr-command.workspace = true
+schemars.workspace = true
+serde.workspace = true
+tokio = { workspace = true, features = ["rt-multi-thread", "sync", "time"] }
+tracing.workspace = true
+
+[dev-dependencies]
+assert_approx_eq.workspace = true
+tokio = { workspace = true, features = ["full"] }
+toml.workspace = true
+
+[lints]
+workspace = true

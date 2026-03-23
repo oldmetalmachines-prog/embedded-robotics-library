@@ -1,0 +1,9 @@
+[package]
+name = "opw_kinematics_test"
+version = "0.1.0"
+edition = "2021"
+
+# default-features = false excludes the bevy/wayland visualization layer
+# so this compiles in headless environments (Jetson, CI, etc.)
+[dependencies]
+rs-opw-kinematics = { version = "1.8.16", default-features = false }

@@ -1,0 +1,31 @@
+[package]
+name = "arci"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Abstract Robot Control Interface"
+keywords = ["robotics", "robot"]
+categories = ["science::robotics"]
+
+[dependencies]
+anyhow.workspace = true
+async-trait.workspace = true
+auto_impl.workspace = true
+futures.workspace = true
+nalgebra.workspace = true
+schemars.workspace = true
+serde.workspace = true
+thiserror.workspace = true
+tokio = { workspace = true, features = ["time"] }
+tracing.workspace = true
+urdf-rs.workspace = true
+
+[dev-dependencies]
+assert_approx_eq.workspace = true
+tokio = { workspace = true, features = ["full"] }
+tokio-test.workspace = true
+toml.workspace = true
+
+[lints]
+workspace = true

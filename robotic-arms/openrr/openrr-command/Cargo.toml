@@ -1,0 +1,31 @@
+[package]
+name = "openrr-command"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "openrr command line tool library"
+keywords = ["robotics", "robot"]
+categories = ["science::robotics"]
+
+[features]
+default = []
+assimp = ["openrr-client/assimp"]
+
+[dependencies]
+arci.workspace = true
+async-recursion.workspace = true
+clap_complete.workspace = true
+clap.workspace = true
+k.workspace = true
+openrr-client.workspace = true
+rustyline.workspace = true
+thiserror.workspace = true
+tracing.workspace = true
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["full"] }
+toml.workspace = true
+
+[lints]
+workspace = true

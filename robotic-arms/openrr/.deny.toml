@@ -1,0 +1,43 @@
+# https://embarkstudios.github.io/cargo-deny/checks/advisories/cfg.html
+[advisories]
+yanked = "deny"
+unmaintained = "none"
+ignore = [
+    "RUSTSEC-2020-0027", # traitobject 0.1, transitively dep of rosrust (via xml-rpc)
+    "RUSTSEC-2020-0071", # time 0.1, transitively dep of rosrust (via xml-rpc)
+    "RUSTSEC-2021-0078", # hyper 0.10, transitively dep of rosrust (via xml-rpc)
+    "RUSTSEC-2021-0079", # hyper 0.10, transitively dep of rosrust (via xml-rpc)
+    "RUSTSEC-2022-0022", # hyper 0.10, transitively dep of rosrust (via xml-rpc)
+    "RUSTSEC-2024-0421", # idna <1.0.3, transitively dep of rosrust (via xml-rpc)
+]
+
+# https://embarkstudios.github.io/cargo-deny/checks/bans/cfg.html
+[bans]
+multiple-versions = "allow" # TODO
+wildcards = "allow" # https://github.com/EmbarkStudios/cargo-deny/issues/448
+skip = []
+
+# https://embarkstudios.github.io/cargo-deny/checks/licenses/cfg.html
+[licenses]
+unused-allowed-license = "deny"
+private.ignore = true
+allow = [
+    "Apache-2.0",
+    "MIT",
+    "Unicode-3.0", # unicode-ident
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "BSL-1.0",
+    "ISC",
+    "Zlib",
+    "MPL-2.0",
+    "CDLA-Permissive-2.0", # webpki-roots
+    "OFL-1.1", # epaint
+    "LicenseRef-UFL-1.0", # epaint (see https://github.com/emilk/egui/issues/2321)
+]
+
+# https://embarkstudios.github.io/cargo-deny/checks/sources/cfg.html
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-git = []

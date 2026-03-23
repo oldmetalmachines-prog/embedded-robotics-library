@@ -1,0 +1,23 @@
+[package]
+name = "arci-speak-cmd"
+# TODO: replace this with `version.workspace = true` when releasing 0.2
+version = "0.1.1"
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "arci::Speaker implementation using local command"
+keywords = ["robotics", "robot"]
+categories = ["science::robotics"]
+
+[dependencies]
+arci.workspace = true
+thiserror.workspace = true
+tokio = { workspace = true, features = ["sync"] }
+
+[dev-dependencies]
+clap.workspace = true
+tokio = { workspace = true, features = ["full"] }
+tracing-subscriber.workspace = true
+
+[lints]
+workspace = true
