@@ -27,7 +27,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             println!("Result for function {f} is '{rsp:?}'");
         }
         _ => {
-            panic!("unexpected result");
+            return Err("unexpected response from modbus server".into());
         }
     }
 

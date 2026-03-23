@@ -29,7 +29,7 @@ impl tokio_modbus::server::Service for Service {
             Request::ReadHoldingRegisters(_, _) => {
                 future::ready(Err(ExceptionCode::IllegalDataAddress))
             }
-            _ => unimplemented!(),
+            _ => future::ready(Err(ExceptionCode::IllegalFunction)),
         }
     }
 }

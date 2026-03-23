@@ -4,6 +4,7 @@
 mod motors;
 
 use core::{mem::MaybeUninit, str::FromStr};
+use embassy_time::{Duration, with_timeout};
 use embassy_executor::Spawner;
 use embassy_net::udp::{PacketMetadata, UdpSocket};
 use embassy_net::{Config as NetConfig, DhcpConfig, Stack, StackResources};
@@ -86,7 +87,6 @@ async fn main(spawner: Spawner) {
     )
     .unwrap();
 
-    // TODO: Move this to async task so we can reconnect automatically
     log::info!("Pre-wifi config: {}", &wifi_ssid);
     let wifi_config = esp_wifi::wifi::ClientConfiguration {
         ssid: wifi_ssid,
@@ -156,25 +156,34 @@ async fn main(spawner: Spawner) {
     udp_socket.bind(8080).unwrap();
 
     loop {
-        let (rx_size, from_addr) = udp_socket.recv_from(&mut msg_buffer).await.unwrap();
-        if rx_size == 0 {
-            log::info!("Received empty message from {}", from_addr);
-            continue;
-        }
-        let response = msg_buffer[rx_size - 1] as char;
-        match response {
-            'F' => motors.forward(),
-            'B' => motors.backward(),
-            'L' => motors.left(),
-            'R' => motors.right(),
-            'N' => motors.stop(),
-            'Q' => {
-                // TODO: Deep sleep here?
-                motors.stop();
-                break;
+        match with_timeout(Duration::from_millis(500), udp_socket.recv_from(&mut msg_buffer)).await {
+            Ok(Ok((rx_size, from_addr))) => {
+                if rx_size == 0 {
+                    log::info!("Received empty message from {}", from_addr);
+                    continue;
+                }
+                let response = msg_buffer[rx_size - 1] as char;
+                match response {
+                    'F' => motors.forward(),
+                    'B' => motors.backward(),
+                    'L' => motors.left(),
+                    'R' => motors.right(),
+                    'N' => motors.stop(),
+                    'Q' => {
+                        motors.stop();
+                        break;
+                    }
+                    _ => log::info!("Unknown command {}", response),
+                }
             }
-            _ => log::info!("Unknown command {}", response),
+            Ok(Err(e)) => {
+                log::warn!("UDP receive error: {:?}", e);
+                motors.stop();
+            }
+            Err(_timeout) => {
+                // No command received within 500ms — stop motors for safety
+                motors.stop();
+            }
         }
-        // TODO: Add timeout to stop motors if nothing received
     }
 }
