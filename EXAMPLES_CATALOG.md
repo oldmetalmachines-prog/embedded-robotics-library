@@ -29,16 +29,19 @@ Complete index of all working examples in this library, organized by platform an
 ### ESP32-S3 / ESP32-C3
 
 #### 🔧 Utilities (Start with these!)
+
 | Example | Purpose | Hardware Needed | Difficulty |
 |---------|---------|-----------------|------------|
 | `esp32/utilities/i2c-scanner/` | Find I2C device addresses | ESP32, breadboard | ⭐ Beginner |
 
 #### 📡 Communication
+
 | Example | Purpose | Hardware Needed | Difficulty |
 |---------|---------|-----------------|------------|
 | `esp32/communication/wifi/udp-telemetry-sender/` | Send sensor data via WiFi | ESP32, WiFi network | ⭐⭐ Intermediate |
 
 #### 📊 Sensors
+
 | Example | Purpose | Hardware Needed | Difficulty |
 |---------|---------|-----------------|------------|
 | `esp32/sensors/examples/mpu6050-basic.rs` | Read IMU (accel/gyro) | ESP32, MPU6050, pull-ups | ⭐⭐ Intermediate |
@@ -46,6 +49,7 @@ Complete index of all working examples in this library, organized by platform an
 | `esp32/sensors/temperature-logger/` | MQTT temperature logger | ESP32, BMP180, WiFi | ⭐⭐⭐ Advanced |
 
 #### 🎮 Complete Projects
+
 | Example | Purpose | Hardware Needed | Difficulty |
 |---------|---------|-----------------|------------|
 | `esp32/examples/snake-game/` | OLED snake game | ESP32, OLED, joystick | ⭐⭐⭐ Advanced |
@@ -57,11 +61,13 @@ Complete index of all working examples in this library, organized by platform an
 ### Raspberry Pi (Pi 5, Pi Zero 2W)
 
 #### 🔧 Utilities
+
 | Example | Purpose | Hardware Needed | Difficulty |
 |---------|---------|-----------------|------------|
 | `raspberry-pi/utilities/udp-telemetry-receiver/` | Receive ESP32 telemetry | Pi, network | ⭐ Beginner |
 
 #### 🔌 GPIO Examples (RPPAL)
+
 | Example | Purpose | Hardware Needed | Difficulty |
 |---------|---------|-----------------|------------|
 | `raspberry-pi/gpio/rppal-examples/gpio_blinkled.rs` | Blink LED | Pi, LED, resistor | ⭐ Beginner |
@@ -74,6 +80,7 @@ Complete index of all working examples in this library, organized by platform an
 | `raspberry-pi/gpio/rppal-examples/uart_blocking_read.rs` | Serial communication | Pi, UART device | ⭐⭐ Intermediate |
 
 #### 🤖 ROS2 Integration
+
 | Example | Purpose | Hardware Needed | Difficulty |
 |---------|---------|-----------------|------------|
 | `raspberry-pi/ros2-integration/examples/ros2_imu_publisher.rs` | Publish IMU to ROS2 | Pi, MPU6050 | ⭐⭐⭐ Advanced |
@@ -84,6 +91,7 @@ Complete index of all working examples in this library, organized by platform an
 ### Raspberry Pi Pico 2W
 
 #### 💡 Basic Examples
+
 | Example | Purpose | Hardware Needed | Difficulty |
 |---------|---------|-----------------|------------|
 | `raspberry-pi/pico-2w/examples/led-blink/` | Blink onboard LED | Pico 2W, USB cable | ⭐ Beginner |
@@ -93,18 +101,18 @@ Complete index of all working examples in this library, organized by platform an
 ### Jetson Orin Nano Super
 
 #### 🔌 GPIO Examples
+
 | Example | Purpose | Hardware Needed | Difficulty |
 |---------|---------|-----------------|------------|
 | `jetson-orin/examples/gpio-blink/` | GPIO LED blink | Jetson, LED, resistor | ⭐ Beginner |
 
 #### 🎥 Computer Vision
+
 | Example | Purpose | Hardware Needed | Difficulty |
 |---------|---------|-----------------|------------|
 | `jetson-orin/examples/rtsp-camera-streamer/` | RTSP camera stream (WIP) | Jetson, CSI/USB camera | ⭐⭐ Intermediate |
 
 **Note:** RTSP example is Work In Progress - basic structure complete, implementation pending
-
-
 
 #### 🎥 Computer Vision (Coming Soon)
 - Camera capture with opencv-rust
@@ -340,6 +348,7 @@ Complete index of all working examples in this library, organized by platform an
 ## 🤝 Contributing Your Examples
 
 After building something that works:
+
 ```bash
 # 1. Copy the template
 cp docs/templates/EXAMPLE_CONTRACT_TEMPLATE.md your-project/README.md
