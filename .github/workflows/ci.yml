@@ -31,6 +31,7 @@ jobs:
             !obd2-diagnostics/**
             !farm-equipment/**
             !servo-control/**
+            !robotic-arms/**
 
   rppal:
     name: Rust checks (rppal)
