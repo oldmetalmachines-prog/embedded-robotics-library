@@ -48,26 +48,31 @@ Essential Rust crates for robotics projects.
 ## Sensor Drivers (embedded-hal)
 
 ### IMU (Inertial Measurement)
+
 - **mpu6050** - 6-axis IMU
 - **mpu9250** - 9-axis IMU
 - **bno055** - 9-axis with fusion
 - **lsm303agr** - Accelerometer + magnetometer
 
 ### Distance
+
 - **vl53l0x** - Time-of-Flight laser
 - **vl53l1x** - ToF (longer range)
 - **hcsr04** - Ultrasonic
 
 ### Environment
+
 - **bmp280** - Pressure/temperature
 - **bme280** - Pressure/temp/humidity
 - **dht11** / **dht22** - Temp/humidity
 
 ### GPS
+
 - **nmea** - NMEA parser
 - **ublox** - u-blox GPS
 
 ### Vision
+
 - Camera interfacing typically via OpenCV bindings
 
 ## Installation
